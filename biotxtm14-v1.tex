@@ -44,7 +44,19 @@ is different from text mining in biomedicine
 
 Applications: search, QA, etc.
 
-Explain literature-based knowledge discovery.
+The scientific literature is growing so rapidly that researchers have been forced to become increasingly specialized to keep up with the state-of-the-art. 
+This specialization can lead to the fragmentation of science, as researchers from different (sub-)disciplines rarely have time to read each other's papers. 
+\newcite{Swanson1986Undiscovered} claimed that this fragmentation of science gives rise to \emph{undiscovered public knowledge}, i.e. still unmade inferences that can be made based on publicly available knowledge. As an example, he hypothesized that fish oils can cure Raynaud's disease by combining two publicly available statements: 1) Fish oils reduce blood viscosity, 2) patients with Raynaud's disease tend to exhibit high blood viscosity \cite{Swanson1986Fishoil}. 
+This method of making hypothesis inferences of the form $A \to C$ based on publicly available statements $A \to B$ and $B \to C$ has been termed \emph{Swanson linking}\footnote{In the Swanson linking paradigm, the operator $\to$ is not interpreted as a logical conditional, but rather as an abstract causal or correlative relation between the terms. The conclusion $A \to C$ is therefore not logically sound, but has nevertheless been showed to give empirically useful results.}. 
+
+The discoveries of Swanson prompted a line of research into methods for automatic identification of undiscovered public knowledge, an area which has been labelled Literature-based discovery (LBD). 
+Most LBD methods are based on Swanson linking, and use term co-occurrence frequencies to detect relations of the type $A \to B$. 
+Terms are usually extracted as n-grams from the text \cite{Lindsay1999LBDLexicalStat} or taken from a controlled vocabulary or ontology \cite{Weeber2001ConceptsInLBD}.
+
+Recently, co-occurrence based methods have come under critique for leading to too many spurious discoveries.
+\newcite{Hristovski2008NLPinLBD} therefore advocate an approach based on Natural Language Processing (NLP), as such approaches are able to be more specific about the relation that holds between two terms. 
+
+
 
 Related work (possibly in separate section or in Discussion section):
 \cite{Hashimoto2012Excitatory}
