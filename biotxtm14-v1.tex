@@ -4,6 +4,7 @@
 \usepackage{lrec2006}
 \usepackage{graphicx}
 \usepackage{todonotes}
+\usepackage{linguex}
 
 \title{Towards text mining in environmental science:\\
 extraction of quantitative variables and their relations}
@@ -20,6 +21,14 @@ extraction of quantitative variables and their relations}
 Abstract\\ 
 \newline 
 \Keywords{Text Mining, Literature-based Knowledge Discovery, Environmental Science, Climate Science, Corpus Annotation, Relation Extraction}}
+
+\newcommand{\tag}[1]{\textsc{#1}}
+
+% Define your own todo notes here, like 
+% \newcommand{\XX}[1]{\todo[inline,author=XX,color=YY]{#1}}
+\newcommand{\EM}[1]{\todo[inline,author=EM,color=yellow]{#1}}
+
+
 
 \begin{document}
 
@@ -47,23 +56,227 @@ Related work (possibly in separate section or in Discussion section):
 Goal and structure of curent paper.
 
 
+
 %=============================================================================
-\section{Annotation scheme}
+\section{Annotation}
 %=============================================================================
 
-Entities:Variables
+\subsection{Procedure}
 
-Events: Change, Increase, Decrease, Cause, Correlate , Feedback
+Data (10 abstracts), preprocessing, Brat, iterative refinement, advise of domain expert
 
-Other elements: combination (and/or), referring expressions
+Driving motivation: does this annotation allow us to extract a rule that is useful for our purpose?
 
-Attributes: Negation
+\EM{Write this out}
+
+
+\subsection{Annotation scheme}
+
+The resulting annotation scheme involves one type of entity (variable), several types of events (change, increase, decrease, cause, correlate, feedback) and some basic logic structure (and/or, negation).  
+
+
+\subsubsection{Variables}
+
+A quantitative variable is an entity that can be counted or measured.
+Its value can be naturally expressed by a number such as a count, a ratio, a percentage or a scalar (quantity of units).
+It can be regarded as a (potential) quantitative variable in an experiment or a model. 
+Not every variable in the text is labeled as such.
+To save annotation time and effort, only those variables related to a change are annotated.
+The  direction of change can be positive (increasing), negative (decreasing) or unspecified (either increasing or decreasing), but there must always be a clear cue in the text that the variable is involved in some change. 
+Examples of changing, increasing and decreasing variables respectively:
+
+\ex.
+  \a. significant changes in [\emph{surface ocean pH}]
+  \b. rise in [\emph{atmospheric CO2 levels}]
+  \c. decline in [\emph{marine primary production}]
+
+In contract, the text spans in \Next are not annotated as variables.
+
+\ex.
+  \a. *[\emph{carbon dioxide}] and [\emph{light}] are two major prerequisites of photosynthesis
+  \b. *changes in [\emph{the network of global biogeochemical cycles}] 
+  \c. *The concentrations of [\emph{DFe}] and [\emph{TaLFe}] were relatively high
+
+The text spans in \Last[a] are measurable, in principle at least, but there is no textual cue in the context indicating that they are subject to change. 
+The text span in \Last[b] admittedly identifies something that is changing, but it is an abstraction -- not something that can be measured and naturally expressed through a number. 
+The ones in \Last[c] express a static state rather than a dynamic event.
+The reason for excluding cases like these is that they do not lead to useful rules about the relation between quantitative variables.
+
+Variables must be indicated as precisely as possible, that is,including any relevant specifications, modifications or conditions. So instead of \Next[a], \Next[b] is prefered.
+
+\ex.
+  \a. *a difference in [\emph{carbon concentration}] between the ocean surface and the deep waters
+  \b. a difference in [\emph{carbon concentration between the ocean surface and the deep waters}]
+
+The choice is motivated by the idea that, given a syntactic parse, it is usually easier to generalize a complex argument by stripping modifiers than the other way around.  
+
+Variables are tagged with the label \tag{Variable}. It is most likely advantaguous to distinguish different subclasses of variables. Currently we are not concerned with this. 
+However, we do not exclude the possibility of a more fine-grained annotation at a later stage. 
+
+
+\subsection{Change, Increase and Decrease}
+
+A change is an event in which the value of a quantitative variable is changing.
+The direction of change can be positive (increasing), negative (decreasing) or unspecified (either increasing or decreasing), but there must always be a clear cue in the text that the variable is involved in a change.
+This is referred to as the \emph{trigger} for the event.
+
+Examples of triggers for event types of change, increase and decrease are:
+
+\ex.
+  \a. [\emph{regional changes}] in phytoplankton
+  \b. [\emph{addition of}] labile dissolved organic carbon
+  \c. [\emph{to slow down}] calcification in corals
+
+Changes must apply to a variable; hence the text span in \Next does not trigger a
+
+\ex. *marine primary production is sensitive to climate [\emph{variability and change}]
+
+Events of increase, decrease and undirected changes are tagged as \tag{Increase}, \tag{Decrease} and \tag{Change} respectively. 
+Events are related to variables through thematic roles, which specify the different participants in the event. 
+Change events must always have a \tag{Theme} role that is filled by the variable that is changing.
+Typical annotation examples are therefore:\footnote{We use labeled brackets to denote enitities, events or thematic roles, depending on the context of discussion.}
+
+\exi.
+  \a. [\tag{Decrease} reduced] [\tag{Theme} calcite production]
+  \b. [\tag{Change} significant changes in] [\tag{Theme} surface ocean pH]
+
+In addition, they can optionally have an \tag{Agent} role or a \tag{Co-theme} role, which will be explained in the next Section.
+
+
+\subsection{Cause}
+
+Cause events involve a pair of changes where the first change causes the second change.
+Since a change event involves a changing variable, as its theme, causal events thus express a causal relation between two changing variables. 
+The trigger of a cause event is annotated with a \tag{Cause} tag. 
+Cause events must always have two thematic roles: an \tag{Agent} identifying the cause and a \tag{Theme} identifying the effect. 
+% Notice that causal relations are directional. 
+% That if, if  A causes B, then it does not follow that B causes A.
+Examples of cause events are:
+
+\exi.
+  \a. [\tag{Agent} rise in atmospheric CO2 levels] [\tag{Cause} \emph{causes}] [\tag{Theme} significant changes in surface ocean pH]
+  \b. [\tag{Agent} Fe(III) addition in the presence of GA (FeGA)] [\tag{Cause} \emph{gave}] [\tag{Theme} higher Fe(II) concentration]
+  \c. [\tag{Agent} diminished calcification] [\tag{Cause} \emph{led to}] [\tag{Theme} a reduction in the ratio of calcite precipitation to organic matter production]
+% number of examples can be reduced
+
+In many cases, a cause event and a change event share one and the same trigger, as in the following examples:
+
+\exi.
+  \a. [\tag{Agent} changes in the magnitude of total and export production] [\tag{Change} \emph{can strongly influence}] [\tag{Theme} atmospheric CO2 levels]
+  \b. [\tag{Theme} calcification and net primary production] [\tag{Increase} \emph{ are significantly increased by}] [\tag{Agent} high CO2 partial pressures]
+  \c. [\tag{Agent} addition of labile dissolved organic carbon] [\tag{Decrease}  \emph{reduced}] [\tag{Theme} phytoplankton biomass]
+
+In \Last[a], \emph{can strongly influence} serves as the cue for a change event with variable \emph{atmospheric CO2 levels} as its theme. 
+At the same time, it is the trigger for a cause event with agent \emph{ changes in the magnitude of total and export production} and theme \emph{atmospheric CO2 levels}.
+In principle, both events can be annotated individually.  
+However, in order to avoid a needlessly complex annotation, we choose to not annotate the cause event explicitly. 
+Instead \emph{changes in the magnitude of total and export production} is given the role of agent in the change event. 
+Presence of an agent role suffices to infer the cause event.
+Two more instances of this pattern are shown in \Last[b] and \Last[c].
+
+\EM{Describe exceptional cases of variable with implicit change}
+
+
+\subsection{Correlate}
+
+Correlate events involve a pair of changes where the first change correlates with the second change. 
+Since a change event involves a changing variable, as its theme, correlate events thus express a correlation between two changing variables. 
+That is, if one of them changes, the other changes along. 
+Correlations  have two roles, \tag{Theme} and \tag{Co-theme}, both of which should be fulfilled by a change event (i.e. \tag{Increase}, \tag{Decrease} or \tag{Change}).
+% or a quantitative variable (Variable)
+Examples of correlate events:
+
+\exi.
+  \a. [\tag{Theme} reduced calcite production] [\tag{Correlate} \emph{ was accompanied by}] [\tag{Co-theme} an increased proportion of malformed coccoliths]
+  \b. [\tag{Theme} carbon:nutrient ratio turns out to decrease] [\tag{Correlate}  \emph{with}] [\tag{Co-theme} increasing mixed-layer depth and temperature]
+  \c. Here we report [\tag{Them}e reduced calcite production] [\tag{Correlate}  \emph{at}] [\tag{Co-theme} increased CO2 concentrations]
+  \d. [\tag{Correlate} \emph{When}] [Co-theme bacterial growth rate was limited by mineral nutrients], [Theme extra organic carbon accumulated in the system]
+%  \e. [\tag{Theme} regional changes in phytoplankton] [\tag{Correlate} coincide with] [\tag{Co-theme} observed changes in kril]
+
+Notice that correlation can be triggered by a verb \Last[a], a preposition \Last[b-c] or an adverb/conjunction \Last[d].
+
+Theoretically, correlation is not a directional relation, in contrast to causation. That is, if a change in variable A is correlated with a change in variable B, then it follows that a change in variable B is correlated with a change in variable A. However, in practice there is often a distinction between a variable of interest (the dependent variable) and related variable (the independent variable). 
+Thus even though strictly speaking there is no causal relation between the two variable, the text usually takes a particular perspective, suggesting one is more central than the other. 
+By convention, the central variable is tagged as \tag{Theme}, whereas the other one is tagged as \tag{Co-theme}. 
+The rule of thumb is that the co-theme is syntactically the argument of a preposition (e.g. \textsc{with, at, under}) or an adverb/conjunction (e.g. \emph{when}).  
+
+Occasionally correlations can hold between a change event and a variable, or even between two variables, rather than between to change events.
+In these exceptional cases, we assume the variable is interpreted as changing (i.e. as being part of an implicit change event), because it is involved in a correlate event.
+Two examples of this exceptional pattern are: 
+
+\exi.
+  \a. [\tag{Increase} Concentrations of DFe increased slightly] [\tag{Correlate} with]  [\tag{Variable} depth in the water column]
+  \b. [\tag{Variable} growth rates in the high-CO2-grown cells] [\tag{Correlate} were related to] [\tag{Variable} light level]
+
+
+In \Last[a], the role of co-theme is not taken by a change event, but by the variable \emph{depth in the water column}.
+It is thus assumed that the depth in the water column is a changing variable in the correlation described.
+Similarly, \Last[b] has both roles of the correlate event taken up by variables, which are therefore interpreted as subject to change.
+
+\EM{Should we allow the same for \tag{Cause}? Check data} 
+
+
+\subsection{Feedback}
+
+Feedback loops are an important concept in climate science. An example is that of the relation between rising temperature and methane release: a rise in temperature causes more permafrost to melt, which causes more release of methane in the atmosphere (a ``green house'' gas), which causes further rising of the temperature, and so on.
+However, explicit mentioning of feedback events in the text appears to be rare compared with the frequent occurrence of change events, so our proposal for annotation of feedbacks is currently based on only a couple of instances.
+Feedback events hold between two variables, filling the roles of \tag{Theme} and \tag{Co-theme}, as exemplified below: 
+
+\exi. our model suggests the existence of [\tag{+Feedback} a positive feedback between] [\tag{Theme} temperature] and [\tag{Co-theme} atmospheric CO2 content]
+
+Analogously to change events, feedback events can positive (amplifying), negative (diminishing) or of unspecified polarity. 
+
+\EM{Consider including positive, negative and unspecified correlation too. Looks better than having an 'inverse' attribute for negetaive correlation.}
+
+
+\subsection{Referring expressions}
+
+Referring expressions such as anaphoric expressions (e.g. \emph{it}, \emph{this}) and underspecified definite descriptions (e.g. \emph{the process}) are annotated only in so far as they play a thematic role in an event of interest. Consider the following narrative:
+
+\exi. 
+  \a.[s1:] Future shoaling of upper-mixed-layer depths will expose phytoplankton to [\tag{Increase} increased] [\tag{Theme} mean light intensities].
+  \b.[s2:] [\tag{RefExp/Agent} \emph{This}] [\tag{Cause} may cause] [\tag{Decrease} a widespread decline in] [\tag{Theme} marine primary production]
+
+The first sentence contains an \tag{Increase} event, which is referred to in the second sentence by means of the referring expression \emph{This}, establishing it as the cause for the\tag{Decrease} event.
+The referring expressions must therefore be resolved in order to arrive at the rule an increase in mean light intensities causes a decrease in marine primary production.
+In order to achieve this, such referring expressions are tagged as \tag{RefExp} and connected with their antecedent by means of a \tag{Coref} relation. 
+  
+
+\subsection{Combinations}
+
+Variables or events can be combined through conjunction or disjunction.
+Such combinations are labeled as \tag{And} or \tag{Or}, where their constituents fill the role of \tag{Part}.
+In \Next[a], for example, the combination \tag{And} serves as the theme of the \tag{Increase} event.
+Likewise, two increasing events are combined to serve as the theme in a causal event.
+
+\exi.
+  \a. [\tag{Increase} increasing [\tag{Part:Variable} mixed-layer depth] [\tag{Theme:And} and] [\tag{Part:Variable} temperature]  
+  \b. [\tag{Cause} gave] [\tag{Part:Increase} higher ] Fe(II) concentration [\tag{Theme:And} and] [\tag{Part:Increase} higher] growth rate of phytoplankton
+
+The alternative option in \Last[a] is to tag the whole combined phrase as a single variable.
+We chose not do so because coordination is notoriously hard problem for syntactic parsers and any help from the annotation in resolving ambiguity should be exploited.
+Notice also that a similar option is not availabe in \Last[b], as considering the whole combination as a single change event would result in loss of substantial information.
+
+
+\subsection{Negation}
+
+Events can carry a negation attribute to account for examples such as:
+
+\exi.
+  \a. TaLFe [\tag{Correlate+Neg} did \emph{not} show any consistent trend with] depth 
+  \b. [\tag{Change+Neg} \emph{No} differences] in cellular organic carbon:nitrogen ratios were observed
+
+Triggers for negation are currently not explicitly annotated.
+
 
 %=============================================================================
 \section{Rule extraction}
 %=============================================================================
 
-Proof that it is possible to fully automatically extract intended rule from proposed annotation. 
+Proof that it is possible to fully automatically extract intended rule
+from proposed annotation. 
+
+\EM{Elaborate}
 
 %=============================================================================
 \section{Discussion}
