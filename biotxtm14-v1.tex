@@ -1,0 +1,112 @@
+% Please write one sentence per line! (easier for version control)
+
+\documentclass[10pt, a4paper]{article}
+\usepackage{lrec2006}
+\usepackage{graphicx}
+\usepackage{todonotes}
+
+\title{Towards text mining in environmental science:\\
+extraction of quantitative variables and their relations}
+
+\name{Author1, Author2, Author3}
+
+\address{ Affiliation1, Affiliation2, Affiliation3 \\
+               Address1, Address2, Address3 \\
+               author1@xxx.yy, author2@zzz.edu, author3@hhh.com\\}
+
+
+\abstract{
+\todo[inline]{Abstract} 
+Abstract\\ 
+\newline 
+\Keywords{Text Mining, Literature-based Knowledge Discovery, Environmental Science, Climate Science, Corpus Annotation, Relation Extraction}}
+
+\begin{document}
+
+\maketitleabstract
+
+%=============================================================================
+\section{Introduction}
+%=============================================================================
+
+Argue that text mining in environmental sciences:
+has not been really pursued so far;
+is different from text mining in biomedicine
+
+Applications: search, QA, etc.
+
+Explain literature-based knowledge discovery.
+
+Related work (possibly in separate section or in Discussion section):
+\cite{Hashimoto2012Excitatory}
+\cite{Mihaila2013BioCause}
+\cite{Zambach2010Lexical}
+\cite{Vossen2008}
+
+
+Goal and structure of curent paper.
+
+
+%=============================================================================
+\section{Annotation scheme}
+%=============================================================================
+
+Entities:Variables
+
+Events: Change, Increase, Decrease, Cause, Correlate , Feedback
+
+Other elements: combination (and/or), referring expressions
+
+Attributes: Negation
+
+%=============================================================================
+\section{Rule extraction}
+%=============================================================================
+
+Proof that it is possible to fully automatically extract intended rule from proposed annotation. 
+
+%=============================================================================
+\section{Discussion}
+%=============================================================================
+
+Automatic annotation:
+What aproach do we intend to use?
+Generic, unsupervised open IE vs dedicated supervised system?
+How well do we think this is going to work?
+Bootstrapping and active learning to save annotation costs?
+
+Variables:
+Interpretation of variables in context (anaphora resolution and resolving referring expression);
+Linking to ontologies
+
+Reasoning:
+How do want to use the extracted rules for reasoning?
+Specification/generalization of rules (relation to natural logic?)
+How to combine with bckground knowledge?
+
+Context modelling:
+Are there examples where context is essential for proper rule application (conditions?)
+
+User interface:
+What kind of use cases do we imagine?
+What functionalities (e.g. clicking through to see source text of rule in publication )
+What kind of user interface would support this? 
+
+%=============================================================================
+\section{Conclusion}
+%=============================================================================
+
+
+%=============================================================================
+\section{Acknowledgements}
+%=============================================================================
+Financial aid from the European Commission (OCEAN-CERTAIN, FP7-ENV-2013-6.1-1; no: 603773) is gratefully acknowledged. 
+
+
+\section{References}
+
+\bibliographystyle{lrec2006}
+\bibliography{biotxtm14}
+
+\end{document}
+
