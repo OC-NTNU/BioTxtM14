@@ -126,7 +126,7 @@ Variables are tagged with the label \tag{Variable}. It is most likely advantaguo
 However, we do not exclude the possibility of a more fine-grained annotation at a later stage. 
 
 
-\subsection{Change, Increase and Decrease}
+\subsubsection{Change, Increase and Decrease}
 
 A change is an event in which the value of a quantitative variable is changing.
 The direction of change can be positive (increasing), negative (decreasing) or unspecified (either increasing or decreasing), but there must always be a clear cue in the text that the variable is involved in a change.
@@ -155,7 +155,7 @@ Typical annotation examples are therefore:\footnote{We use labeled brackets to d
 In addition, they can optionally have an \tag{Agent} role or a \tag{Co-theme} role, which will be explained in the next Section.
 
 
-\subsection{Cause}
+\subsubsection{Cause}
 
 Cause events involve a pair of changes where the first change causes the second change.
 Since a change event involves a changing variable, as its theme, causal events thus express a causal relation between two changing variables. 
@@ -189,7 +189,7 @@ Two more instances of this pattern are shown in \Last[b] and \Last[c].
 \EM{Describe exceptional cases of variable with implicit change}
 
 
-\subsection{Correlate}
+\subsubsection{Correlate}
 
 Correlate events involve a pair of changes where the first change correlates with the second change. 
 Since a change event involves a changing variable, as its theme, correlate events thus express a correlation between two changing variables. 
@@ -228,7 +228,7 @@ Similarly, \Last[b] has both roles of the correlate event taken up by variables,
 \EM{Should we allow the same for \tag{Cause}? Check data} 
 
 
-\subsection{Feedback}
+\subsubsection{Feedback}
 
 Feedback loops are an important concept in climate science. An example is that of the relation between rising temperature and methane release: a rise in temperature causes more permafrost to melt, which causes more release of methane in the atmosphere (a ``green house'' gas), which causes further rising of the temperature, and so on.
 However, explicit mentioning of feedback events in the text appears to be rare compared with the frequent occurrence of change events, so our proposal for annotation of feedbacks is currently based on only a couple of instances.
@@ -241,7 +241,7 @@ Analogously to change events, feedback events can positive (amplifying), negativ
 \EM{Consider including positive, negative and unspecified correlation too. Looks better than having an 'inverse' attribute for negetaive correlation.}
 
 
-\subsection{Referring expressions}
+\subsubsection{Referring expressions}
 
 Referring expressions such as anaphoric expressions (e.g. \emph{it}, \emph{this}) and underspecified definite descriptions (e.g. \emph{the process}) are annotated only in so far as they play a thematic role in an event of interest. Consider the following narrative:
 
@@ -254,7 +254,7 @@ The referring expressions must therefore be resolved in order to arrive at the r
 In order to achieve this, such referring expressions are tagged as \tag{RefExp} and connected with their antecedent by means of a \tag{Coref} relation. 
   
 
-\subsection{Combinations}
+\subsubsection{Combinations}
 
 Variables or events can be combined through conjunction or disjunction.
 Such combinations are labeled as \tag{And} or \tag{Or}, where their constituents fill the role of \tag{Part}.
@@ -270,7 +270,7 @@ We chose not do so because coordination is notoriously hard problem for syntacti
 Notice also that a similar option is not availabe in \Last[b], as considering the whole combination as a single change event would result in loss of substantial information.
 
 
-\subsection{Negation}
+\subsubsection{Negation}
 
 Events can carry a negation attribute to account for examples such as:
 
