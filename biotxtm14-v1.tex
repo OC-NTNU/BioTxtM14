@@ -75,12 +75,22 @@ Goal and structure of curent paper.
 
 \subsection{Procedure}
 
-Data (10 abstracts), preprocessing, Brat, iterative refinement, advise of domain expert
+The data consisted of 12 abstracts (2369 words) from recent, high-quality scientific journal publications about the relation between climate and ocean changes. 
+These were selected by our domain expert (author MVA) as a reasonably representative sample of the text type in the targeted area, comprissing multi-disciplinary work in marine biology, marine science, oceanography, environmental science, climate science, biogeoscience and geophysics.
+Text was automatically extracted from PDF files.
+Abstracts were manually extracted, tokenized and split into sentences, also allowing for manual correction of minor PDF-to-text conversion errors.
 
-Driving motivation: does this annotation allow us to extract a rule that is useful for our purpose?
-
-\EM{Write this out}
-
+Annotation was carried out using the Brat annotation tool \cite{stenetorp2012}.
+The annotion scheme described below was developed in an iterative fashion in close colaboration with our domain expert.
+It is inspired by annotation efforts in the biomedical domain such as the GENIA corpus \cite{Kim2003GENIA} and the corpora used in the BioNLP shared tasks on event extraction \cite{Kim2009Overview}.
+It covers a particular type of events -- those of change, cause, correlation and feedback -- and the entities involved in them -- quantitative variables.
+The primary goal of the annotation is not to analyse the text according to some linguistic formalism or theory, or following some knowledge representation formalism or ontological theory.
+Instead the goal of the annotation is rather pragmatic: to serve as an intermediary step in the process of extracting rules about the relation between quantitative variables from raw text.      
+ 
+The annotation scheme proposed below seems a good candidate for this purpose.
+However, it remains to be seem how it holds up when applied to more text.
+Inter-annotator agreement has not been measured so far.
+\EM{Probably better to merge this paragraph into Discussion section} 
 
 \subsection{Annotation scheme}
 
