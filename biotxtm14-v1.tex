@@ -55,7 +55,7 @@ This specialization can lead to the fragmentation of science, as researchers fro
 \newcite{Swanson1986Undiscovered} claimed that this fragmentation of science gives rise to \emph{undiscovered public knowledge}, i.e. still unmade inferences that can be made based on publicly available knowledge. As an example, he hypothesized that fish oils can cure Raynaud's disease by combining two publicly available statements: 1) Fish oils reduce blood viscosity, 2) patients with Raynaud's disease tend to exhibit high blood viscosity \cite{Swanson1986Fishoil}. 
 This method of making hypothesis inferences of the form $A \to C$ based on publicly available statements $A \to B$ and $B \to C$ has been termed \emph{Swanson linking}\footnote{In the Swanson linking paradigm, the operator $\to$ is not interpreted as a logical conditional, but rather as an abstract causal or correlative relation between the terms. The conclusion $A \to C$ is therefore not logically sound, but has nevertheless been showed to give empirically useful results.}. 
 
-The discoveries of Swanson prompted a line of research into methods for automatic identification of undiscovered public knowledge, an area which has been labelled Literature-based discovery (LBD). 
+The discoveries of Swanson prompted a line of research into methods for computer support in the identification of undiscovered public knowledge, an area which has been labelled Literature-based discovery (LBD). 
 Most LBD methods are based on Swanson linking, and use term co-occurrence frequencies to detect relations of the type $A \to B$. 
 Terms are usually extracted as n-grams from the text \cite{Lindsay1999LBDLexicalStat} or taken from a controlled vocabulary or ontology \cite{Weeber2001ConceptsInLBD}.
 
@@ -336,6 +336,13 @@ What kind of use cases do we imagine?
 What functionalities (e.g. clicking through to see source text of rule in publication )
 What kind of user interface would support this? 
 }
+The complete system is conceived as a research support system that provides the user with a overview over the relations between the concepts in the domain. 
+In the perceived user interface, the user can look up any domain concept.
+The user will then be presented with a list of the concepts that are in a relation with the look-up concept. 
+By again looking up concepts that are in a relation with the newly selected concept the user can build a chain of related concepts.
+The user interface will let the user explore the relation holding between two concepts closely, by providing links to the source sentence(s) from which the relation was extracted. 
+Based on the frequency of occurrence of the relation between the two concepts and the source text, the user will the be able to judge the validity of the concept-relation chain.
+This should reduce the workload for a researcher by providing easy and comprehensive access to relevant relations in the domain as well as pointers to source texts.
 
 %=============================================================================
 \section{Conclusion}
