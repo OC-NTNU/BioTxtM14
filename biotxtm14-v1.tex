@@ -44,11 +44,11 @@ A number of open challenges are discussed, including automatic annotation, norma
 \section{Introduction}
 %=============================================================================
 
-Argue that text mining in environmental sciences:
+\todo[inline]{Argue that text mining in environmental sciences:
 has not been really pursued so far;
-is different from text mining in biomedicine
+is different from text mining in biomedicine}
 
-Applications: search, QA, etc.
+\todo[inline]{Applications: search, QA, etc}.
 
 The scientific literature is growing so rapidly that researchers have been forced to become increasingly specialized to keep up with the state-of-the-art. 
 This specialization can lead to the fragmentation of science, as researchers from different (sub-)disciplines rarely have time to read each other's papers. 
@@ -62,18 +62,17 @@ Terms are usually extracted as n-grams from the text \cite{Lindsay1999LBDLexical
 Recently, co-occurrence based methods have come under critique for leading to too many spurious discoveries.
 \newcite{Hristovski2008NLPinLBD} therefore advocate an approach based on Natural Language Processing (NLP), as such approaches are able to be more specific about the relation that holds between two terms. 
 
-
-
-Related work (possibly in separate section or in Discussion section):
+\todo[inline]{Related work (possibly in separate section or in Discussion section):
 \cite{Hashimoto2012Excitatory}
 \cite{Mihaila2013BioCause}
 \cite{Zambach2010Lexical}
-\cite{Vossen2008}
+\cite{Vossen2008}}
 
-
-Goal and structure of curent paper.
-
-
+The remainder of this paper is structured as follows. 
+The next Section proposes a new annotation scheme to capture the events of interest -- those of change, cause, correlation and feedback -- and the entities involved in them -- quantitative variables. 
+Section~\ref{sec:extraction} shows that  rules can indeed be automatically extracted from annotated text.
+Section~\ref{sec:discussion} discusses a number of open challenges are discussed, including automatic annotation, normalization of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
+The last Section closes with conclusions and future work.
 
 %=============================================================================
 \section{Annotation}
@@ -300,47 +299,55 @@ Triggers for negation are currently not explicitly annotated.
 %=============================================================================
 \section{Rule extraction}
 %=============================================================================
+\label{sec:extraction}
 
-Proof that it is possible to fully automatically extract intended rule
-from proposed annotation. 
-
-\EM{Elaborate}
+\EM{Proof that it is possible to fully automatically extract intended rule
+from proposed annotation.}
 
 %=============================================================================
 \section{Discussion}
 %=============================================================================
+\label{sec:discussion}
 
-Automatic annotation:
+\todo[inline]{Automatic annotation:
 What aproach do we intend to use?
 Generic, unsupervised open IE vs dedicated supervised system?
 How well do we think this is going to work?
 Bootstrapping and active learning to save annotation costs?
+}
 
-Variables:
+\todo[inline]{Variables:
 Interpretation of variables in context (anaphora resolution and resolving referring expression);
 Linking to ontologies
+}
 
-Reasoning:
+\todo[inline]{Reasoning:
 How do want to use the extracted rules for reasoning?
 Specification/generalization of rules (relation to natural logic?)
 How to combine with bckground knowledge?
+}
 
-Context modelling:
+\todo[inline]{Meta-knowledge and context:
 Are there examples where context is essential for proper rule application (conditions?)
+}
 
-User interface:
+\todo[inline]{User interface:
 What kind of use cases do we imagine?
 What functionalities (e.g. clicking through to see source text of rule in publication )
 What kind of user interface would support this? 
+}
 
 %=============================================================================
 \section{Conclusion}
 %=============================================================================
 
 
+\todo[inline]{Conclusions}
+
 %=============================================================================
 \section{Acknowledgements}
 %=============================================================================
+
 Financial aid from the European Commission (OCEAN-CERTAIN, FP7-ENV-2013-6.1-1; no: 603773) is gratefully acknowledged. 
 
 
