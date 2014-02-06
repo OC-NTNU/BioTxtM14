@@ -17,10 +17,16 @@ extraction of quantitative variables and their relations}
 
 
 \abstract{
-\todo[inline]{Abstract} 
-Abstract\\ 
-\newline 
-\Keywords{Text Mining, Literature-based Knowledge Discovery, Environmental Science, Climate Science, Corpus Annotation, Relation Extraction}}
+This paper addresses text mining in the cross-disciplinary domain of environmental science and climate science.
+It is motivated by the desire for literature-based knowledge discovery from scientific publications.
+The particular goal is to automatically extract relations between quantitative variables from raw text.
+This results in rules of the form ``If variable X increases, than variable Y decreases''.    
+As a first step in this direction, an annotion scheme is proposed to capture the events of interest -- those of change, cause, correlation and feedback -- and the entities involved in them -- quantitative variables.
+Its purpose is to serve as an intermediary step in the process of rule extraction.
+It is shown that the desired rules can indeed be automatically extracted from annotated text.
+A number of open challenges are discussed, including automatic annotation, normalization of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
+\\ \newline 
+\Keywords{Text Mining, Literature-based Knowledge Discovery, Environmental Science, Climate Science, Corpus Annotation, Relation Extraction, Event Extraction}}
 
 \newcommand{\tag}[1]{\textsc{#1}}
 
@@ -84,8 +90,8 @@ Annotation was carried out using the Brat annotation tool \cite{stenetorp2012}.
 The annotion scheme described below was developed in an iterative fashion in close colaboration with our domain expert.
 It is inspired by annotation efforts in the biomedical domain such as the GENIA corpus \cite{Kim2003GENIA} and the corpora used in the BioNLP shared tasks on event extraction \cite{Kim2009Overview}.
 It covers a particular type of events -- those of change, cause, correlation and feedback -- and the entities involved in them -- quantitative variables.
-The primary goal of the annotation is not to analyse the text according to some linguistic formalism or theory, or following some knowledge representation formalism or ontological theory.
-Instead the goal of the annotation is rather pragmatic: to serve as an intermediary step in the process of extracting rules about the relation between quantitative variables from raw text.      
+The primary reason of annotation is not to analyse the text according to some linguistic formalism or theory, or to follow some knowledge representation formalism or ontological theory.
+Instead the purpose of the annotation is rather pragmatic: to serve as an intermediary step in the process of extracting rules about the relation between quantitative variables from raw text.      
  
 The annotation scheme proposed below seems a good candidate for this purpose.
 However, it remains to be seem how it holds up when applied to more text.
