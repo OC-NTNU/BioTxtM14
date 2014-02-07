@@ -4,4 +4,6 @@
 *.bbl
 *.blg
 *.log
+!ex?.pdf
+
 

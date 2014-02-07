@@ -5,6 +5,7 @@
 \usepackage{graphicx}
 \usepackage{todonotes}
 \usepackage{linguex}
+\usepackage{amssymb}
 
 \title{Towards text mining in environmental science:\\
 extraction of quantitative variables and their relations}
@@ -307,6 +308,46 @@ Triggers for negation are currently not explicitly annotated.
 \section{Rule extraction}
 %=============================================================================
 \label{sec:extraction}
+
+See Figure~\ref{fig:ex1}. 
+See Figure~\ref{fig:ex2}. 
+See Figure~\ref{fig:ex3}.
+
+\setlength{\fboxsep}{10pt}
+
+\begin{figure*}
+\begin{center}
+\framebox[\textwidth]{
+\includegraphics[scale=0.9]{ex1.pdf}}
+\framebox[\textwidth]{[ $\uparrow$ mean light intensities $\wedge$ $\uparrow$ CO2 levels ]~~~ $\Longrightarrow$~~~$\downarrow$ marine primary production}
+ \caption{Example of a causal rule extracted from a pair of annotated sentences}
+\end{center}
+\label{fig:ex1}
+\end{figure*}
+
+
+\begin{figure*}
+\begin{center}
+\framebox[\textwidth]{
+\includegraphics[scale=0.9]{ex2.pdf}}
+\framebox[\textwidth]{[ $\uparrow$ mixed-layer depth $\wedge$ $\uparrow$ temperature ]~~~ $\leadsto$~~~$\downarrow$ the carbon:nutrient ratio}
+ \caption{Example of a correlation rule extracted from an annotated sentence}
+\end{center}
+\label{fig:ex2}
+\end{figure*}
+
+
+
+\begin{figure*}
+\begin{center}
+\framebox[\textwidth]{
+\includegraphics[scale=0.9]{ex3.pdf}}
+\framebox[\textwidth]{$\updownarrow$ temperature~~~$\Longleftrightarrow$~~~$\updownarrow$ marine primary production}
+ \caption{Example of a feedback rule extracted from an annotated sentence}
+\end{center}
+\label{fig:ex3}
+\end{figure*}
+
 
 \EM{Proof that it is possible to fully automatically extract intended rule
 from proposed annotation.}
