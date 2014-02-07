@@ -55,12 +55,14 @@ This specialization can lead to the fragmentation of science, as researchers fro
 \newcite{Swanson1986Undiscovered} claimed that this fragmentation of science gives rise to \emph{undiscovered public knowledge}, i.e. still unmade inferences that can be made based on publicly available knowledge. As an example, he hypothesized that fish oils can cure Raynaud's disease by combining two publicly available statements: 1) Fish oils reduce blood viscosity, 2) patients with Raynaud's disease tend to exhibit high blood viscosity \cite{Swanson1986Fishoil}. 
 This method of making hypothesis inferences of the form $A \to C$ based on publicly available statements $A \to B$ and $B \to C$ has been termed \emph{Swanson linking}\footnote{In the Swanson linking paradigm, the operator $\to$ is not interpreted as a logical conditional, but rather as an abstract causal or correlative relation between the terms. The conclusion $A \to C$ is therefore not logically sound, but has nevertheless been showed to give empirically useful results.}. 
 
-The discoveries of Swanson prompted a line of research into methods for automatic identification of undiscovered public knowledge, an area which has been labelled Literature-based discovery (LBD). 
+The discoveries of Swanson prompted a line of research into methods for computer support in the identification of undiscovered public knowledge, an area which has been labelled Literature-based discovery (LBD). 
 Most LBD methods are based on Swanson linking, and use term co-occurrence frequencies to detect relations of the type $A \to B$. 
 Terms are usually extracted as n-grams from the text \cite{Lindsay1999LBDLexicalStat} or taken from a controlled vocabulary or ontology \cite{Weeber2001ConceptsInLBD}.
 
 Recently, co-occurrence based methods have come under critique for leading to too many spurious discoveries.
 \newcite{Hristovski2008NLPinLBD} therefore advocate an approach based on Natural Language Processing (NLP), as such approaches are able to be more specific about the relation that holds between two terms. 
+LBD efforts have traditionally been undertaken in the biomedical domain, and have therefore benefited from existing biomedical NLP tools such as SemRep\footnote{http://semrep.nlm.nih.gov/}.
+Application of NLP-based LBD techniques to less resourced domains, such as the environmental sciences, would however require the development or adaptation of NLP tools to the new domain.
 
 \todo[inline]{Related work (possibly in separate section or in Discussion section):
 \cite{Hashimoto2012Excitatory}
@@ -320,12 +322,22 @@ Bootstrapping and active learning to save annotation costs?
 Interpretation of variables in context (anaphora resolution and resolving referring expression);
 Linking to ontologies
 }
+In a cross-disciplinary domain such as Environmental/Climate Science, it is likely that different backgrounds lead to differences in vocabulary\footnote{Here we should put an example of different word usage}.
+To Swanson link the statements $A \to B_1$ and $B_2 \to C$, it is necessary to for the system to detect that $B_1 = B_2$ given that $B_1$ and $B_2$ are synonymous.
+To this end, it will be necessary to link the annotated variables to concepts in a domain ontology\footnote{Given that we have an ontology, would this be a part of the annotation process, or simply something we do computational later on?}.
 
 \todo[inline]{Reasoning:
 How do want to use the extracted rules for reasoning?
 Specification/generalization of rules (relation to natural logic?)
 How to combine with bckground knowledge?
 }
+In their NLP-based LBD system, Bitola, \newcite{Hristovski2008NLPinLBD} define certain Discovery Patterns to guide their search through the concept-relation space. A discovery pattern specifies a set of conditions, and a relation that is predicted to hold if the conditions are satisfied. One example from their application is the \emph{Maybe\_treats} pattern, which holds between a drug and a disease if they have an opposite effect on a body function or bodily substance. In the Bitola system the user navigates through the concept-relation chains manually, but it is conceivable to conduct automatic searches for applications of discovery patterns using sub-graph matching.
+
+While potential treatments are of particular interest to the biomedical domain, feedback loops are particularly interesting in the Environmental/Climate Science domain. 
+The annotation guidelines presented here have been developed with the goal of facilitating discovery of feedback loop candidates, in the way they focus on quantitative changes in variables rather than plain causal relations\footnote{This sentence should maybe be moved to an earlier stage, as it explains our motivation. Also this is neglecting contradictions/other chains.}.
+Feedback loops are normally expressed as a chain of change events where first and last concept are the same, however as there is no theoretical bound to the length of a feedback chain, it is impossible to enumerate the set of all patterns that can give rise to a feedback loop.
+Reasoning will therefore follow a production rule inspired approach, where a feedback loop is detected if the system is able to infer a change from a working memory containing only the same change\footnote{Just stating my opinion, I know you might have entirely different conceptions of how the system will work}.
+
 
 \todo[inline]{Meta-knowledge and context:
 Are there examples where context is essential for proper rule application (conditions?)
@@ -336,6 +348,13 @@ What kind of use cases do we imagine?
 What functionalities (e.g. clicking through to see source text of rule in publication )
 What kind of user interface would support this? 
 }
+The complete system is conceived as a research support system that provides the user with a overview over the relations between the concepts in the domain. 
+In the perceived user interface, the user can look up any domain concept.
+The user will then be presented with a list of the concepts that are in a relation with the look-up concept. 
+By again looking up concepts that are in a relation with the newly selected concept the user can build a chain of related concepts.
+The user interface will let the user explore the relation holding between two concepts closely, by providing links to the source sentence(s) from which the relation was extracted. 
+Based on the frequency of occurrence of the relation between the two concepts and the source text, the user will the be able to judge the validity of the concept-relation chain.
+This should reduce the workload for a researcher by providing easy and comprehensive access to relevant relations in the domain as well as pointers to source texts.
 
 %=============================================================================
 \section{Conclusion}
