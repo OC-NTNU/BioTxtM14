@@ -33,6 +33,7 @@ A number of open challenges are discussed, including automatic annotation, norma
 % Define your own todo notes here, like 
 % \newcommand{\XX}[1]{\todo[inline,author=XX,color=YY]{#1}}
 \newcommand{\EM}[1]{\todo[inline,author=EM,color=yellow]{#1}}
+\newcommand{\EA}[1]{\todo[inline,author=EA,color=green]{#1}}
 
 
 
@@ -171,12 +172,16 @@ Typical annotation examples are therefore:\footnote{We use labeled brackets to d
 
 In addition, they can optionally have an \tag{Agent} role or a \tag{Co-theme} role, which will be explained in the next Section.
 
+Change events can also function as Cause/Correlate events, as will be described in the next Section, in which case they take an AGENT or CO-THEME role as well.
+
 
 \subsubsection{Cause}
 
 Cause events involve a pair of changes where the first change causes the second change.
 Since a change event involves a changing variable, as its theme, causal events thus express a causal relation between two changing variables. 
-The trigger of a cause event is annotated with a \tag{Cause} tag. 
+The trigger of a cause event is annotated with a \tag{Cause} tag.
+Triggers are often verbs, but can also be adjectives (\emph{stimulatory}), adverbs (\emph{therefore}) or subjunctive phrases (\emph{due to}, \emph{in response to}) and other phrasal expression (\emph{has an effect on}).  
+
 Cause events must always have two thematic roles: an \tag{Agent} identifying the cause and a \tag{Theme} identifying the effect. 
 % Notice that causal relations are directional. 
 % That if, if  A causes B, then it does not follow that B causes A.
@@ -224,10 +229,10 @@ Examples of correlate events:
 
 Notice that correlation can be triggered by a verb \Last[a], a preposition \Last[b-c] or an adverb/conjunction \Last[d].
 
-Theoretically, correlation is not a directional relation, in contrast to causation. That is, if a change in variable A is correlated with a change in variable B, then it follows that a change in variable B is correlated with a change in variable A. However, in practice there is often a distinction between a variable of interest (the dependent variable) and related variable (the independent variable). 
-Thus even though strictly speaking there is no causal relation between the two variable, the text usually takes a particular perspective, suggesting one is more central than the other. 
+Statistically speaking, correlation is not a directional relation, in contrast to causation. That is, if a change in variable A is correlated with a change in variable B, then it follows that a change in variable B is correlated with a change in variable A. However, in discourse there is often a distinction between a variable of interest (the dependent variable) and related variable (the independent variable). 
+Thus even though strictly speaking there is no causal relation between the two variables, the text usually takes a particular perspective, suggesting one is more central than the other. 
 By convention, the central variable is tagged as \tag{Theme}, whereas the other one is tagged as \tag{Co-theme}. 
-The rule of thumb is that the co-theme is syntactically the argument of a preposition (e.g. \textsc{with, at, under}) or an adverb/conjunction (e.g. \emph{when}).  
+The rule of thumb is that the co-theme is syntactically the argument of a preposition (e.g. \emph{with, at, under}) or an adverb/conjunction (e.g. \emph{when}).  
 
 Occasionally correlations can hold between a change event and a variable, or even between two variables, rather than between to change events.
 In these exceptional cases, we assume the variable is interpreted as changing (i.e. as being part of an implicit change event), because it is involved in a correlate event.
@@ -243,7 +248,7 @@ It is thus assumed that the depth in the water column is a changing variable in 
 Similarly, \Last[b] has both roles of the correlate event taken up by variables, which are therefore interpreted as subject to change.
 
 \EM{Should we allow the same for \tag{Cause}? Check data} 
-
+\EA{Perhaps we can move this discussion, together with the discussion of inherently changing variables (Ocean Acidification, etc), to a new sub-chapter about variables that are interpreted as changing without an explicit change?}
 
 \subsubsection{Feedback}
 
@@ -253,7 +258,7 @@ Feedback events hold between two variables, filling the roles of \tag{Theme} and
 
 \exi. our model suggests the existence of [\tag{+Feedback} a positive feedback between] [\tag{Theme} temperature] and [\tag{Co-theme} atmospheric CO2 content]
 
-Analogously to change events, feedback events can positive (amplifying), negative (diminishing) or of unspecified polarity. 
+Analogously to change events, feedback events can positive (self-sustaining, self-enhancing), negative (self-stabilizing, self-diminishing) or of unspecified polarity. 
 
 \EM{Consider including positive, negative and unspecified correlation too. Looks better than having an 'inverse' attribute for negetaive correlation.}
 
