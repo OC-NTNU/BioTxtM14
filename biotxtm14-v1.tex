@@ -1,4 +1,5 @@
 % Please write one sentence per line! (easier for version control)
+% MY IMPORTANT REMARK
 
 \documentclass[10pt, a4paper]{article}
 \usepackage{lrec2006}
@@ -428,13 +429,13 @@ The annotation guidelines presented here have been developed with the goal of fa
 
 First,  quantitative variables and the various types of events (i.e., change, causal, and correlation) and the correlation and causal relationships among these, as shown in annotation examples, are extracted and learned by the system.  
 Then the system will generate scientific hypotheses on the basis of this extracted knowledge. 
-A hypothesis is  either 1) a chain of events that connects  different oceanographic entities that donÕt appear  together in any of the extracted individual relationships/rules, or  2) a chain that starts and ends with the same entity but does this  through a chain of extracted rules of at least length two.  
+A hypothesis is  either 1) a chain of events that connects  different oceanographic entities that donï¿½t appear  together in any of the extracted individual relationships/rules, or  2) a chain that starts and ends with the same entity but does this  through a chain of extracted rules of at least length two.  
 The latter type of chains capture discovery hypotheses about the feedback loops which are of key importance for knowledge discovery in  climate science.
 
 Generation of discovery hypotheses is essentially a search on a rather large event and relation space. 
 Relations with the left-hand side (LHS) and right-hand side (RHS) representation can be considered as rules and reasoning with the extracted relation will therefore follow a production rule inspired approach. 
 The extracted rules comprise the rule base and a working memory(WM) represents the knowledge elements such as events and quantitative variables as well as partially discovered hypotheses, i.e., the parts of  hypothesis chains  so far discovered. 
-A rule can ÒfireÓ  when its LHS matches the knowledge elements asserted to the working memory.  
+A rule can ï¿½fireï¿½  when its LHS matches the knowledge elements asserted to the working memory.  
 When a rule fires, its RHS indicates new knowledge elements to be placed into the WM. In this way, the number of knowledge elements in the WM increases quickly. 
 Consequently, there may be several rules, at each step,  of which LHS can match with facts in the WM. Decision of which rule to fire, i.e., "conflict resolution", may increasingly become time demanding. 
 To combat the complexity of the search, some heuristic are needed. 
@@ -446,7 +447,7 @@ For example {\it Disease may cause dead"} is more general than {\it Cancer may c
 For example, 
 {\it Lack of nitrogen causes a decline in phytoplankton growth} rate is more specific than {\it Lack of iron causes a decline in phytoplankton growth rate}. 
 For example GRAFFITI \newcite{Fajtlowicz89}  that discovers hypotheses in geometry and conjectures in graph theory prefers more general statements over specific ones. 
-ARROWSMITH on the other hand prefers less general conjectures while filtering out broad terms such as ÒhormoneÓ, because it aims to discover  unknown ÒpositiveÓ side effects of a specific drug. 
+ARROWSMITH on the other hand prefers less general conjectures while filtering out broad terms such as ï¿½hormoneï¿½, because it aims to discover  unknown ï¿½positiveï¿½ side effects of a specific drug. 
 
 The subsumption relation between two event concepts is part of the background knowledge every climate researcher is assumed to have. 
 This type of knowledge, therefore, is not explicitly pronounced anywhere in the  climate science literature.
