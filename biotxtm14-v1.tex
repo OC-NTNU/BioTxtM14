@@ -311,9 +311,44 @@ Triggers for negation are currently not explicitly annotated.
 %=============================================================================
 \label{sec:extraction}
 
-See Figure~\ref{fig:ex1}. 
-See Figure~\ref{fig:ex2}. 
-See Figure~\ref{fig:ex3}.
+The proposed annotation allows for autamatic extraction of rules about the relations between quantitative variables.
+There are three main types of rules: causal rules, correlation rules and feedback rules.
+
+Causal rules are of the type ``If variable X changes, than variable Y changes''.
+An example of such rule its source text is shown in Figure~\ref{fig:ex1}.
+The notation uses single arrows to denote changing variables, where `$\uparrow$' stands for 'increasing', `$\downarrow$' for 'decreasing' and `$\updownarrow$' for 'changing.'
+Parts of combination are joined by `$\wedge$' and delimited by square brackets.
+A causal relation is denoted by the double arrow `$\Longrightarrow$'.
+Causal rules are basically extracted by looking for \tag{Cause} events, taking their \tag{Agent} and \tag{Theme} roles for cause and effect respectively.
+Another source for causal rules is change events with both an \tag{Agent} and a \tag{Theme} role.
+Notice that in Figure~\ref{fig:ex1}, interpreting combinations and resolving referring expressions to their antecedent takes some additional processing.
+Another source for causal rules is change events with both \tag{Agent} and \tag{Theme} roles.
+
+Correlation rules are of the type ``Changes in variable X correlate with changes in variable Y'', as exemplified in Figure~\ref{fig:ex2}.
+The curly arrow `$\leadsto$' is used to indicate the relation between a independent and a dependent variable.
+These rules are extracted from \tag{Corelate} events, using their \tag{Co-theme} role as the independent variable (LHS of the rule) and their \tag{Theme} role as the dependent variable (RHS of the rule). 
+
+Feedback rules, an example of which is shown in Figure~\ref{fig:ex3}, are of the form: ``Changes in variable X feed back through changes in variable Y''.
+The feedback relation is denoted by a double sided arrow `$\Longleftrightarrow$', optionally with a superscripted '+' or '-' for positive and negative feedback respectively.
+
+Notice that conceptually a feedback relation is assumed to hold between changing events.
+However, often there is no explicit trigger for a change event present in the text.
+For example, in the annotation in Figure~\ref{fig:ex3}, both roles are filled by variables instead of change events.
+Such variables are therefore 'promoted' to change events during rule extraction, resulting in `$\updownarrow$ temperature' and `$\updownarrow$ marine primary production'.
+Similar promotion apply occassionaly to variables in events of change, cause or correlation.
+
+\EM{
+Not all rules extracted in this way are eqally useful. 
+Discus some problematic cases like:
+
+NOT [ +/- depth  CORRELATE  +/- that of TaLFe ], 
+
+[ ++ FeGA CAUSE +/- the harmful effect of UV on the phytoplankton population ]
+}
+
+
+
+
 
 \setlength{\fboxsep}{10pt}
 
@@ -344,15 +379,12 @@ See Figure~\ref{fig:ex3}.
 \begin{center}
 \framebox[\textwidth]{
 \includegraphics[scale=0.9]{ex3.pdf}}
-\framebox[\textwidth]{$\updownarrow$ temperature~~~$\Longleftrightarrow$~~~$\updownarrow$ marine primary production}
+\framebox[\textwidth]{$\updownarrow$ temperature~~~$\Longleftrightarrow^{+}$~~~$\updownarrow$ marine primary production}
  \caption{Example of a feedback rule extracted from an annotated sentence}
 \end{center}
 \label{fig:ex3}
 \end{figure*}
 
-
-\EM{Proof that it is possible to fully automatically extract intended rule
-from proposed annotation.}
 
 %=============================================================================
 \section{Discussion}
@@ -446,8 +478,6 @@ This should reduce the workload for a researcher by providing easy and comprehen
 
 Financial aid from the European Commission (OCEAN-CERTAIN, FP7-ENV-2013-6.1-1; no: 603773) is gratefully acknowledged. 
 
-
-\section{References}
 
 \bibliographystyle{lrec2006}
 \bibliography{biotxtm14}
