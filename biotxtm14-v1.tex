@@ -18,7 +18,7 @@ extraction of quantitative variables and their relations}
 
 
 \abstract{
-This paper addresses text mining in the cross-disciplinary domain of environmental science and climate science.
+This paper addresses text mining in the cross-disciplinary domain of earth science, environmental science and climate science.
 It is motivated by the desire for literature-based knowledge discovery from scientific publications.
 The particular goal is to automatically extract relations between quantitative variables from raw text.
 This results in rules of the form ``If variable X increases, than variable Y decreases''.    
@@ -27,7 +27,7 @@ Its purpose is to serve as an intermediary step in the process of rule extractio
 It is shown that the desired rules can indeed be automatically extracted from annotated text.
 A number of open challenges are discussed, including automatic annotation, normalization of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
 \\ \newline 
-\Keywords{Text Mining, Literature-based Knowledge Discovery, Environmental Science, Climate Science, Corpus Annotation, Relation Extraction, Event Extraction}}
+\Keywords{Text Mining, Literature-based Knowledge Discovery, Earth Science, Environmental Science, Climate Science, Corpus Annotation, Relation Extraction, Event Extraction}}
 
 \newcommand{\tag}[1]{\textsc{#1}}
 
@@ -48,11 +48,52 @@ A number of open challenges are discussed, including automatic annotation, norma
 \section{Introduction}
 %=============================================================================
 
+One of the characteristics of the cross-disciplinary domain of earth science, environmental science and climate science is the existence of many different processes that affect each other in direct and indirect ways, resulting in highly complex systems.
+In climate science, for example, \emph{climate feedback} is defined as ``An interaction in which a perturbation in one climate quantity causes a change in a second, and the change in the
+second quantity ultimately leads to an additional change in the first. 
+A negative feedback is one in which the initial perturbation is weakened
+by the changes it causes; a positive feedback is one in which the initial
+perturbation is enhanced.'' \cite{stocker2013climate}.
+Indentifying such feedback processes is generally considered a crucial step in understanding and predicting global warming.
+
+Unfortunately much potential knowledge regarding processes and their interactions is likely to be hidden in the scientific literature, scattered over journals catering to different scientific communities with relatively little communication among them.
+Given the vast and constantly growing nature of this body of literature, it is indeed hard for individual researchers to keep track of all relevant publications in their field of expertise, let alone of those in related or even more distant areas.   
+Text mining of scientific literature may contribute to alleviating this problem \cite{Etzioni2011Search} .
+Earth, environmental and climate science, in particular, may all benefit from automatic retrieval and extraction of processes and their interactions from scientific publications.
+The extracted information can be indexed, thus allowing researchers to search for interactions between processes in a much more effective way than with conventional keyword-based search engines.
+In addition, this structured information can be used for inference in discovery support systems.
+For example, pairs of cause and effect processes can be chained together, possibly in combination with existing domain knowledge, in order to suggest hypotheses about indirect interactions or feedback loops or to point out contradictory findings.
+
+Curently text mining in earth science, climate science and environmental science appears to be virtually non-existent. 
+As a first step in this direction, this paper explores the possibities for automatic extraction of relations between quantitative variables from raw text.
+The desired rules are of the type: ``If variable X increases, than variable Y decreases''.    
+An annotion scheme is proposed to annotate the events of interest, namely, those pf change, cause, correlation and feedback, as well as the entities involved in them, called quantitative variables.
+Its purpose is to serve as an intermediary step in the process of rule extraction.
+It is shown that such rules can indeed be automatically extracted from annotated text.
+  
+The remainder of this paper is structured as follows. 
+The next Section first discusses related work on event extraction and caual relation extraction, as well as on literature-based knowledge discovery.
+Section~\ref{sec:annot} proposes a new annotation scheme to capture the events of interest -- those of change, cause, correlation and feedback -- and the entities involved in them -- quantitative variables. 
+In Section~\ref{sec:extraction} it is shown that rules can indeed be automatically extracted from annotated text.
+Section~\ref{sec:discussion} discusses a number of open challenges are discussed, including automatic annotation, normalization of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
+The last Section closes with conclusions and future work.
+
+
+%=============================================================================
+\section{Related work}
+%=============================================================================
+
+\todo[inline]{Related work (possibly in separate section or in Discussion section):
+\cite{Hashimoto2012Excitatory}
+\cite{Mihaila2013BioCause}
+\cite{Zambach2010Lexical}
+\cite{Vossen2008}}
+
 \todo[inline]{Argue that text mining in environmental sciences:
 has not been really pursued so far;
 is different from text mining in biomedicine}
 
-\todo[inline]{Applications: search, QA, etc}.
+\subsection{Literature-based knowledge discovery}
 
 The scientific literature is growing so rapidly that researchers have been forced to become increasingly specialized to keep up with the state-of-the-art. 
 This specialization can lead to the fragmentation of science, as researchers from different (sub-)disciplines rarely have time to read each other's papers. 
@@ -66,26 +107,18 @@ Terms are usually extracted as n-grams from the text \cite{Lindsay1999LBDLexical
 Recently, co-occurrence based methods have come under critique for leading to too many spurious discoveries.
 \newcite{Hristovski2008NLPinLBD} therefore advocate an approach based on Natural Language Processing (NLP), as such approaches are able to be more specific about the relation that holds between two terms. 
 LBD efforts have traditionally been undertaken in the biomedical domain, and have therefore benefited from existing biomedical NLP tools such as SemRep\footnote{http://semrep.nlm.nih.gov/}.
-Application of NLP-based LBD techniques to less resourced domains, such as the environmental sciences, would however require the development or adaptation of NLP tools to the new domain.
+Application of NLP-based LBD techniques to less resourced domains would however require the development or adaptation of NLP tools to the new domain.
 
-\todo[inline]{Related work (possibly in separate section or in Discussion section):
-\cite{Hashimoto2012Excitatory}
-\cite{Mihaila2013BioCause}
-\cite{Zambach2010Lexical}
-\cite{Vossen2008}}
+\subsection{Causal relation extraction}
+
 NLP-based approaches are based on the automatic extraction of relations from text. Causal relatiosn are one of the most popular types of relations to extract. They are used not only for LBD but also for question answering. In the work by \cite{Mihaila2013}, several machine learning algorithms are applied to recognize causality triggers such as "therefore", "because", "as a result of" etc. The approach is tested on BioCause and BioDRB corpora, which consist of articles with manually annotated causal relations between named entities in the biomedical domain. Machine learning approach has also been applies by \cite{Pechsiri2010a} to extract causal relations in the agricultural domain. These relations are then used to construct explanation knowledge graphs that represent the domain knwoledge.
 
 Causal relations is one type of relations that can be used for LBD purposes. Other, more fine-grained types of relations has been identified as well. In the work by \cite{Zambach2010Lexical}, the authors identify and analyze verbs that express regulation relations, postive and negative, between processes and substances in biomedical domain. They propose that this knowledge can be used for automatic annotation of such relations in text. A somewhat similar types of relations has been proposed by \cite{Hashimoto2012Excitatory}. They identify excitory, inhibitory and neutral relations with corresponding set of extraction templates. More templates are acquired automatically by a bootstrapiing process. Excitatory relations are then used for extraction of contradictions, causality relations and genration of causality hypothesis.
 
-The remainder of this paper is structured as follows. 
-The next Section proposes a new annotation scheme to capture the events of interest -- those of change, cause, correlation and feedback -- and the entities involved in them -- quantitative variables. 
-Section~\ref{sec:extraction} shows that  rules can indeed be automatically extracted from annotated text.
-Section~\ref{sec:discussion} discusses a number of open challenges are discussed, including automatic annotation, normalization of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
-The last Section closes with conclusions and future work.
-
 %=============================================================================
 \section{Annotation}
 %=============================================================================
+\label{sec:annot}
 
 \subsection{Procedure}
 
@@ -409,6 +442,7 @@ In a cross-disciplinary domain such as Environmental/Climate Science, it is like
 For example, marine chemist use the term \emph{speciation} to describe formation of the different chemical and physical forms of an element, such as organically complexed iron, collidal iron, particulate iron, iron with 2 positive charge (Fe (II)) , iron with 3 positive charge (Fe(III), inorganic iron, etc. 
 All of these called \emph{species} of iron and to separate iron forms into these forms is \emph{speciation}. 
 In contrast, marine biologist use the term \emph{species} for different forms of life; for example, \emph{diatom} and \emph{dinoflagelattes} are diferent species.
+On the other hand, \emph{export production} and \emph{biological pump} are different names, used by chemists and biologists repspectively, for the same process of carbon cycling in the oceans.
 
 To Swanson link the statements $A \to B_1$ and $B_2 \to C$, it is necessary to for the system to detect that $B_1 = B_2$ given that $B_1$ and $B_2$ are synonymous.
 To this end, it will be necessary to link the annotated variables to concepts in a domain ontology\EA{Given that we have an ontology, would this be a part of the annotation process, or simply something we do computational later on?}.
