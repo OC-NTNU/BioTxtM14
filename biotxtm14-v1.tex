@@ -86,15 +86,7 @@ Prior to that, the next Section starts off with discussing related work on event
 %=============================================================================
 \label{sec:related}
 
-\todo[inline]{Related work (possibly in separate section or in Discussion section):
-\cite{Hashimoto2012Excitatory}
-\cite{Mihaila2013BioCause}
-\cite{Zambach2010Lexical}
-\cite{Vossen2008}}
-
-\todo[inline]{Argue that text mining in environmental sciences:
-has not been really pursued so far;
-is different from text mining in biomedicine}
+\todo[inline]{Sharpen: focus on why our work is new/different from related work}
 
 \subsection{Literature-based knowledge discovery}
 
@@ -137,11 +129,6 @@ It covers a particular type of events -- those of change, cause, correlation and
 The primary reason of annotation is not to analyse the text according to some linguistic formalism or theory, or to follow some knowledge representation formalism or ontological theory.
 Instead the purpose of the annotation is rather pragmatic: to serve as an intermediary step in the process of extracting rules about the relation between quantitative variables from raw text.      
  
-The annotation scheme proposed below seems a good candidate for this purpose.
-However, it remains to be seem how it holds up when applied to more text.
-Inter-annotator agreement has not been measured so far.
-\EM{Probably better to merge this paragraph into Discussion section} 
-
 \subsection{Annotation scheme}
 
 The resulting annotation scheme involves one type of entity (variable), several types of events (change, increase, decrease, cause, correlate, feedback) and some basic logic structure (and/or, negation).  
@@ -300,10 +287,8 @@ Feedback events hold between two variables, filling the roles of \tag{Theme} and
 
 \exi. our model suggests the existence of [\tag{+Feedback} a positive feedback between] [\tag{Theme} temperature] and [\tag{Co-theme} atmospheric CO2 content]
 
-Analogously to change events, feedback events can positive (self-sustaining, self-enhancing), negative (self-stabilizing, self-diminishing) or of unspecified polarity. 
-
-\EM{Consider including positive, negative and unspecified correlation too. Looks better than having an 'inverse' attribute for negetaive correlation.}
-
+Analogously to change events, feedback events can positive (self-sustaining, self-enhancing), negative (self-stabilizing, self-diminishing) or of unspecified polarity.
+Positive or negative feedback are annotated with an attributue whenever a trigger is present. 
 
 \subsubsection{Referring expressions}
 
@@ -376,18 +361,6 @@ For example, in the annotation in Figure~\ref{fig:ex3}, both roles are filled by
 Such variables are therefore 'promoted' to change events during rule extraction, resulting in `$\updownarrow$ temperature' and `$\updownarrow$ marine primary production'.
 Similar promotion apply occassionaly to variables in events of change, cause or correlation.
 
-\EM{
-Not all rules extracted in this way are eqally useful. 
-Discus some problematic cases like:
-
-NOT [ +/- depth  CORRELATE  +/- that of TaLFe ], 
-
-[ ++ FeGA CAUSE +/- the harmful effect of UV on the phytoplankton population ]
-}
-
-
-
-
 
 \setlength{\fboxsep}{10pt}
 
@@ -429,6 +402,11 @@ NOT [ +/- depth  CORRELATE  +/- that of TaLFe ],
 \section{Discussion}
 %=============================================================================
 \label{sec:discussion}
+ 
+The annotation scheme proposed below seems a good candidate for the pupose of rule extraction.
+However, it has only been tried on a small set of abstracts and it remains to be seen how it holds up when applied to more text.
+Inter-annotator agreement has not been measured so far.
+In addition to this, we are also considering a type of evaluation in which extracted rules and their corresponding source texts are shown to domain experts, who are then asked to judge to what extent the rule is entailed by the text. 
 
 \todo[inline]{Automatic annotation:
 What aproach do we intend to use?
@@ -437,102 +415,54 @@ How well do we think this is going to work?
 Bootstrapping and active learning to save annotation costs?
 }
 
-\todo[inline]{Variables:
-Interpretation of variables in context (anaphora resolution and resolving referring expression);
-Linking to ontologies
-}
-In a cross-disciplinary domain such as Environmental/Climate Science, it is likely that different backgrounds lead to differences in vocabulary.
-For example, marine chemist use the term \emph{speciation} to describe formation of the different chemical and physical forms of an element, such as organically complexed iron, collidal iron, particulate iron, iron with 2 positive charge (Fe (II)) , iron with 3 positive charge (Fe(III), inorganic iron, etc. 
-All of these called \emph{species} of iron and to separate iron forms into these forms is \emph{speciation}. 
-In contrast, marine biologist use the term \emph{species} for different forms of life; for example, \emph{diatom} and \emph{dinoflagelattes} are diferent species.
-On the other hand, \emph{export production} and \emph{biological pump} are different names, used by chemists and biologists repspectively, for the same process of carbon cycling in the oceans.
+The extracted rules expressing relations of correlation, causality or feedback between quantitative variables are intended to be used in knowledge discovery support systems.
+One use case is to search for other variables directly related to a certain variable of interest.
+For example, find all processes that affect or are affected by a rise in atmospheric CO2 level.
+The variable in question may be expressed in many different ways though, for example, as \emph{CO2}, \emph{atmospheric CO2}, \emph{CO2 concentrations} or \emph{CO2 partial pressures}, but not as \emph{ CO2 levels in oceanic surface waters} or \emph{the distribution of CO2 between the atmosphere and the ocean}.
+Simple string matching between the variables in queries to those in rules will given limited recall and precison.
+Related to this is the issue of differences in terminology across research fields.
+For instance, \emph{export production} and \emph{biological pump} are different terms, used by chemists and biologists repspectively, for the same process of carbon cycling in the oceans. 
+One possible strategy to cope with this issue is to normalize all relevant entities by linking them to a unique concept in an ontology \cite{Bada2012Concept}.
+However, whereas the concepts of interest in biomedicine are relatively well understood -- including entities such cells, proteins and genes -- and covered by widely used ontologies, earth science currently seems to lack a similar common ground.
 
-To Swanson link the statements $A \to B_1$ and $B_2 \to C$, it is necessary to for the system to detect that $B_1 = B_2$ given that $B_1$ and $B_2$ are synonymous.
-To this end, it will be necessary to link the annotated variables to concepts in a domain ontology\EA{Given that we have an ontology, would this be a part of the annotation process, or simply something we do computational later on?}.
+A different but related problem is exemplified in correlation rule \Next[b] extracted from the second part of sentence \Next[a].
 
-\todo[inline]{Reasoning:
-How do want to use the extracted rules for reasoning?
-Specification/generalization of rules (relation to natural logic?)
-How to combine with bckground knowledge?
-}
-In their NLP-based LBD system, Bitola, \newcite{Hristovski2008NLPinLBD} define certain Discovery Patterns to guide their search through the concept-relation space. 
-A discovery pattern specifies a set of conditions, and a relation that is predicted to hold if the conditions are satisfied. 
-One example from their application is the \emph{Maybe\_treats} pattern, which holds between a drug and a disease if they have an opposite effect on a body function or bodily substance. 
-In the Bitola system the user navigates through the concept-relation chains manually, but it is conceivable to conduct automatic searches for applications of discovery patterns using sub-graph matching.
+\exi. 
+  \a. Concentrations of DFe increased slightly with depth in the water column, while that of TaLFe did not show any consistent trend with depth.
+  \b. $\neg$ [ $\updownarrow$ depth~~~$\leadsto$~~~$\updownarrow$ that of TaLFe ]
 
-While potential treatments are of particular interest to the biomedical domain, feedback loops are particularly interesting in the Climate Science domain. 
-The annotation guidelines presented here have been developed with the goal of facilitating discovery of feedback loop candidates, in the way they focus on quantitative changes in variables rather than plain causal relations\footnote{This sentence should maybe be moved to an earlier stage, as it explains our motivation. Also this is neglecting contradictions/other chains.}.
+The problem is that \emph{depth} in \Last[b] is too general and should in fact be linked to \emph{depth in the water column} for proper interpretation. 
+Likewise, \emph{that of TaLFe} should be interpreted as \emph{concentrations of TalFE}.
+This illustrates the need for coreference resolution and more general, linking of subsequent mentions of the same entity in the text, a notoriously hard task in NLP. 
 
-First,  quantitative variables and the various types of events (i.e., change, causal, and correlation) and the correlation and causal relationships among these, as shown in annotation examples, are extracted and learned by the system.  
-Then the system will generate scientific hypotheses on the basis of this extracted knowledge. 
-A hypothesis is  either 1) a chain of events that connects  different oceanographic entities that don’t appear  together in any of the extracted individual relationships/rules, or  2) a chain that starts and ends with the same entity but does this  through a chain of extracted rules of at least length two.  
-The latter type of chains capture discovery hypotheses about the feedback loops which are of key importance for knowledge discovery in  climate science.
+Another use case for extracted rules is to generate potential hypotheses about indirect relations between variables or feedback loops.
+This can be accomplished by chaining together two or more rules, matching the change event on the right-hand-side of one rule to a similar change event on the left-hand-side of another rule.
+Matching gives rise to the same problems discussed above, i.e., different ways of referring to the same entity.
+In addition, there is the issue of context-dependency.
+Most rules are not universally applicable, but only apply under certain conditions in a particular context.
+For example, a rule may be limited in scope to certain biological species or organisms, a particular geographical region or historical time period, subject to given assumption (\emph{only if \ldots}), etc.
+This is related to initiatives for annotating meta-knowledge such as confidence level (fact vs. conjecture), source (observation vs. analysis) or origin (present or cited work) as in  \cite{Thompson2011Enriching}.  
+Proper modelling of rule context would require a rather deep understanding of the whole text. 
+For now, we plan to leave this to the user by offering facilities in the user interface to quickly inspect the source text for each rule.
 
-Generation of discovery hypotheses is essentially a search on a rather large event and relation space. 
-Relations with the left-hand side (LHS) and right-hand side (RHS) representation can be considered as rules and reasoning with the extracted relation will therefore follow a production rule inspired approach. 
-The extracted rules comprise the rule base and a working memory(WM) represents the knowledge elements such as events and quantitative variables as well as partially discovered hypotheses, i.e., the parts of  hypothesis chains  so far discovered. 
-A rule can “fire”  when its LHS matches the knowledge elements asserted to the working memory.  
-When a rule fires, its RHS indicates new knowledge elements to be placed into the WM. In this way, the number of knowledge elements in the WM increases quickly. 
-Consequently, there may be several rules, at each step,  of which LHS can match with facts in the WM. Decision of which rule to fire, i.e., "conflict resolution", may increasingly become time demanding. 
-To combat the complexity of the search, some heuristic are needed. 
-Heuristics need to be formulated according to the peculiarities of the climate domain. 
-Just to give an idea, one  concern may be whether the more general or  the more specific rules will be most preferred. 
-
-A rule may be more general than another one when an event it involves subsumes an event in the other rule.  
-For example {\it Disease may cause dead"} is more general than {\it Cancer may cause dead}. Similarly,  a rule that have more conjunctions  is more specific than a rule that has no or fewer AND on itsLHS. 
-For example, 
-{\it Lack of nitrogen causes a decline in phytoplankton growth} rate is more specific than {\it Lack of iron causes a decline in phytoplankton growth rate}. 
-For example GRAFFITI \newcite{Fajtlowicz89}  that discovers hypotheses in geometry and conjectures in graph theory prefers more general statements over specific ones. 
-ARROWSMITH on the other hand prefers less general conjectures while filtering out broad terms such as “hormone”, because it aims to discover  unknown “positive” side effects of a specific drug. 
-
-The subsumption relation between two event concepts is part of the background knowledge every climate researcher is assumed to have. 
-This type of knowledge, therefore, is not explicitly pronounced anywhere in the  climate science literature.
-While this is not a problem for human experts,  a computer system needs to represent this background knowledge explicitly and use it, for example, when comparing their generality/specificity. 
-Using the example mentioned above, the background knowledge should represent an  IS-A relation between {\it disease} and {\it cancer}, i.e., {\it cancer IS-A disease}. 
-
-Another important use of domain knowledge is during the construction of chains, more specifically, when connecting the RHS of a rule with the LHS of the next rule in the chain. 
-Let us assume two rules $A \to B$   and  $C \to D$. 
-In some cases B will be the directly equal to C while in other cases there maybe a close but "indirect" relationship between B and C  (e.g., B IS-A F, F PART-OF D,  D IS-A C) which is not explicit in any extracted rule.  
-Again, for human experts this may be background knowledge which corresponds to a chain of relations in the domain knowledge of the LBKD system and needs to be derived from the domain knowledge base in order to connect the rules  $A \to B$ and $B \to C$ . 
-
-
-
-
-\todo[inline]{Meta-knowledge and context:
-Are there examples where context is essential for proper rule application (conditions?)
-}
-
-Another mechanism for narrowing the search, as well as increasing the quality of the discovery chains is to represent the context/constraints specifying when a rule is sanctioned. For example X may cause Y only when the temperature is higher than 10 centigrade degrees. Yet  another mechanism for restricting the search is associating confidence measures to the extracted rules.  Rules that have higher confidence levels are in general given higher priority to be selected. A rule may have higher confidence if it is found in multiple papers compared to a rule that is extracted from only one paper. The type of journal the paper is published also affects the confidence level, i.e, \emph{Nature} or \emph{Science} are presumed to give higher confidence to the papers, and in turn, rules extracted from these papers. 
-
-\todo[inline]{User interface:
-What kind of use cases do we imagine?
-What functionalities (e.g. clicking through to see source text of rule in publication )
-What kind of user interface would support this? 
-}
-\MVA{For a user interface as a user of potential program  i wish to see
-1-around the interaction between the variables of X and Y 
-A) to check how other variables will be effected from the interaction between  X and Y 
-  B) to check  cascade effects visually
-C) to see the most and least significant changes in a visualised way
-D) to see conflicting information
-E) to see or define contextual restriction
-}
-
-The complete system is conceived as a research support system that provides the user with a overview over the relations between the concepts in the domain. 
-In the perceived user interface, the user can look up any domain concept.
-The user will then be presented with a list of the concepts that are in a relation with the look-up concept. 
-By again looking up concepts that are in a relation with the newly selected concept the user can build a chain of related concepts.
-The user interface will let the user explore the relation holding between two concepts closely, by providing links to the source sentence(s) from which the relation was extracted. 
-Based on the frequency of occurrence of the relation between the two concepts and the source text, the user will the be able to judge the validity of the concept-relation chain.
-This should reduce the workload for a researcher by providing easy and comprehensive access to relevant relations in the domain as well as pointers to source texts.
+Inference with rules may be further enhanced by exploiting domain knowledge.
+For example, given an ontology which contains the fact that \emph{diatoms} are a type of \emph{phytoplankton}, rules containing either of the terms may be generalized by substituting the hypernym of specialized by substituting the hyponym.
+In similar vein, rules can be generalized by removing specifiers, modifiers or parts of a conjunction.
+Whether or not this constitutes valid inference seems connected to recent developments in textual entailment, in particular work on natural logic \cite{MacCartney2008Modeling}.
+    
 
 %=============================================================================
 \section{Conclusion}
 %=============================================================================
 \label{sec:conclusion}
 
-\todo[inline]{Conclusions}
+An annotion scheme was proposed to capture events of change, cause, correlation and feedback, as well as  the entities involved in them, in the cross-disciplinary domain of earth science, environmental science and climate science.
+It was shown that rules about the relation between changing processes can be automatically extracted from annotated text.
+Follow up work will involve annotating more text, measuring interannotator agreement and rule adequacy.
+Next, tools for automatic annotation will be developed.
+Future work will also address normalization of entities, tracking of entity mentions, modelling of rule context and combination with domain knowledge. 
 
+ 
 %=============================================================================
 \section{Acknowledgements}
 %=============================================================================
