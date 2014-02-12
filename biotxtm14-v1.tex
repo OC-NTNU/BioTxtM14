@@ -3,9 +3,13 @@
 \documentclass[10pt, a4paper]{article}
 \usepackage{lrec2006}
 \usepackage{graphicx}
-\usepackage{todonotes}
 \usepackage{linguex}
 \usepackage{amssymb}
+
+\usepackage{todonotes}
+% To hide all notes use 
+%\usepackage[disable]{todonotes}
+
 
 \title{Towards text mining in earth science:\\
 extraction of quantitative variables and their relations}
@@ -48,40 +52,39 @@ A number of open challenges are discussed, including automatic annotation, norma
 \section{Introduction}
 %=============================================================================
 
-One of the characteristics of the cross-disciplinary domain of earth science, environmental science and climate science is the existence of many different processes that affect each other in direct and indirect ways, resulting in highly complex systems.
+One of the characteristics of the cross-disciplinary fields of earth science, environmental science and climate science is the existence of many different processes that affect each other in direct and indirect ways, resulting in highly complex systems.
 In climate science, for example, \emph{climate feedback} is defined as ``An interaction in which a perturbation in one climate quantity causes a change in a second, and the change in the
 second quantity ultimately leads to an additional change in the first. 
 A negative feedback is one in which the initial perturbation is weakened
 by the changes it causes; a positive feedback is one in which the initial
 perturbation is enhanced.'' \cite{stocker2013climate}.
-Indentifying such feedback processes is generally considered a crucial step in understanding and predicting global warming.
+Indentifying such feedback processes is generally considered a crucial step in understanding and predicting phenomena like global warming.
 
-Unfortunately much potential knowledge regarding processes and their interactions is likely to be hidden in the scientific literature, scattered over journals catering to different scientific communities with relatively little communication among them.
+Unfortunately much potential knowledge regarding processes and their interactions is hidden in the scientific literature, scattered over journals catering to different scientific communities with relatively little communication among them.
 Given the vast and constantly growing nature of this body of literature, it is indeed hard for individual researchers to keep track of all relevant publications in their field of expertise, let alone of those in related or even more distant areas.   
+
 Text mining of scientific literature may contribute to alleviating this problem \cite{Etzioni2011Search} .
-Earth, environmental and climate science, in particular, may all benefit from automatic retrieval and extraction of processes and their interactions from scientific publications.
+Earth, environmental and climate science may all benefit from automatic retrieval and extraction of processes and their interactions from scientific publications.
 The extracted information can be indexed, thus allowing researchers to search for interactions between processes in a much more effective way than with conventional keyword-based search engines.
 In addition, this structured information can be used for inference in discovery support systems.
 For example, pairs of cause and effect processes can be chained together, possibly in combination with existing domain knowledge, in order to suggest hypotheses about indirect interactions or feedback loops or to point out contradictory findings.
 
 Curently text mining in earth science, climate science and environmental science appears to be virtually non-existent. 
 As a first step in this direction, this paper explores the possibities for automatic extraction of relations between quantitative variables from raw text.
-The desired rules are of the type: ``If variable X increases, than variable Y decreases''.    
-An annotion scheme is proposed to annotate the events of interest, namely, those pf change, cause, correlation and feedback, as well as the entities involved in them, called quantitative variables.
+The desired rules are of the type: ``If variable X increases, than variable Y decreases''.
+Following the lead of text mining initiatives in biomedicine \cite{Kim2009Overview}, we explore manual text annotation for creating annotated corpora, which can be used to train classifiers for automatic annotation, and ultimately automatic rule extraction. 
+In Section~\ref{sec:annot}, an annotion scheme is proposed to annotate the events of interest, namely, those of change, cause, correlation and feedback, as well as the entities involved in them.
 Its purpose is to serve as an intermediary step in the process of rule extraction.
-It is shown that such rules can indeed be automatically extracted from annotated text.
-  
-The remainder of this paper is structured as follows. 
-The next Section first discusses related work on event extraction and caual relation extraction, as well as on literature-based knowledge discovery.
-Section~\ref{sec:annot} proposes a new annotation scheme to capture the events of interest -- those of change, cause, correlation and feedback -- and the entities involved in them -- quantitative variables. 
-In Section~\ref{sec:extraction} it is shown that rules can indeed be automatically extracted from annotated text.
-Section~\ref{sec:discussion} discusses a number of open challenges are discussed, including automatic annotation, normalization of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
-The last Section closes with conclusions and future work.
+It is shown in Section~\ref{sec:extraction} that such rules can indeed be automatically extracted from annotated text.
+Section~\ref{sec:discussion} discusses a range of open challenges, including automatic annotation, normalization of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
+The final Section~\ref{sec:conclusion} closes with conclusions and future work.
+Prior to that, the next Section starts off with discussing related work on event extraction and causal relation extraction.
 
 
 %=============================================================================
 \section{Related work}
 %=============================================================================
+\label{sec:related}
 
 \todo[inline]{Related work (possibly in separate section or in Discussion section):
 \cite{Hashimoto2012Excitatory}
@@ -526,7 +529,7 @@ This should reduce the workload for a researcher by providing easy and comprehen
 %=============================================================================
 \section{Conclusion}
 %=============================================================================
-
+\label{sec:conclusion}
 
 \todo[inline]{Conclusions}
 
@@ -534,8 +537,9 @@ This should reduce the workload for a researcher by providing easy and comprehen
 \section{Acknowledgements}
 %=============================================================================
 
+\todo[inline]{
 Financial aid from the European Commission (OCEAN-CERTAIN, FP7-ENV-2013-6.1-1; no: 603773) is gratefully acknowledged. 
-
+}
 
 \bibliographystyle{lrec2006}
 \bibliography{biotxtm14}
