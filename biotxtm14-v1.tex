@@ -90,25 +90,38 @@ Prior to that, the next Section starts off with discussing related work on event
 
 \subsection{Literature-based knowledge discovery}
 
-The scientific literature is growing so rapidly that researchers have been forced to become increasingly specialized to keep up with the state-of-the-art. 
-This specialization can lead to the fragmentation of science, as researchers from different (sub-)disciplines rarely have time to read each other's papers. 
-\newcite{Swanson1986Undiscovered} claimed that this fragmentation of science gives rise to \emph{undiscovered public knowledge}, i.e. still unmade inferences that can be made based on publicly available knowledge. As an example, he hypothesized that fish oils can cure Raynaud's disease by combining two publicly available statements: 1) Fish oils reduce blood viscosity, 2) patients with Raynaud's disease tend to exhibit high blood viscosity \cite{Swanson1986Fishoil}. 
-This method of making hypothesis inferences of the form $A \to C$ based on publicly available statements $A \to B$ and $B \to C$ has been termed \emph{Swanson linking}\footnote{In the Swanson linking paradigm, the operator $\to$ is not interpreted as a logical conditional, but rather as an abstract causal or correlative relation between the terms. The conclusion $A \to C$ is therefore not logically sound, but has nevertheless been showed to give empirically useful results.}. 
+In a cross-disciplinary field, as knowledge regarding concepts and their relations are scattered across scientific communities with a limited degree of interaction, it is likely that there exists inferences that can be made on basis of existing knowledge, but have not been made, because no single research group has had the required knowledge to make the inference. 
+\newcite{Swanson1986Undiscovered} labelled these potential inferences \emph{undiscovered public knowledge}, and made the claim that they are ubiquitous in science. 
+As an example, he hypothesized that fish oils can cure Raynaud's disease by combining two publicly available statements: 1) Fish oils reduce blood viscosity, 2) patients with Raynaud's disease tend to exhibit high blood viscosity \cite{Swanson1986Fishoil}. 
+This method of inferring hypotheses of the form $A \to C$ based on publicly available statements $A \to B$ and $B \to C$ has been termed \emph{Swanson linking}\footnote{In the Swanson linking paradigm, the operator $\to$ is not interpreted as a logical conditional, but rather as an abstract causal or correlative relation between the terms. The conclusion $A \to C$ is therefore not logically sound, but has nevertheless been showed to give empirically useful results.}. 
 
 The discoveries of Swanson prompted a line of research into methods for computer support in the identification of undiscovered public knowledge, an area which has been labelled Literature-based discovery (LBD). 
 Most LBD methods are based on Swanson linking, and use term co-occurrence frequencies to detect relations of the type $A \to B$. 
 Terms are usually extracted as n-grams from the text \cite{Lindsay1999LBDLexicalStat} or taken from a controlled vocabulary or ontology \cite{Weeber2001ConceptsInLBD}.
 
-Recently, co-occurrence based methods have come under critique for leading to too many spurious discoveries.
-\newcite{Hristovski2008NLPinLBD} therefore advocate an approach based on Natural Language Processing (NLP), as such approaches are able to be more specific about the relation that holds between two terms. 
+Recently, co-occurrence based methods have come under critique for yielding imprecise results, as they fail to exploit the true structure of knowledge contained in scientific literature.
+\newcite{Hristovski2008NLPinLBD} therefore advocate a text mining based approach, where the relation extraction is used to discover relations between two concepts.
 LBD efforts have traditionally been undertaken in the biomedical domain, and have therefore benefited from existing biomedical NLP tools such as SemRep\footnote{http://semrep.nlm.nih.gov/}.
-Application of NLP-based LBD techniques to less resourced domains would however require the development or adaptation of NLP tools to the new domain.
+Application of text mining-based LBD techniques to less resourced domains would however require the development or adaptation of NLP tools, a goal which the current paper can be considered the first step towards. 
 
-\subsection{Causal relation extraction}
+\subsection{Relation extraction}
 
-NLP-based approaches are based on the automatic extraction of relations from text. Causal relatiosn are one of the most popular types of relations to extract. They are used not only for LBD but also for question answering. In the work by \cite{Mihaila2013}, several machine learning algorithms are applied to recognize causality triggers such as "therefore", "because", "as a result of" etc. The approach is tested on BioCause and BioDRB corpora, which consist of articles with manually annotated causal relations between named entities in the biomedical domain. Machine learning approach has also been applies by \cite{Pechsiri2010a} to extract causal relations in the agricultural domain. These relations are then used to construct explanation knowledge graphs that represent the domain knwoledge.
+For an NLP system to support LBD, automatic extraction of relations from text is required. In relation extraction, the causal relation is one of the most common target relations. 
+Causal relations are used in a range of tasks such as question answering, as well as LBD. 
+In the work by \cite{Mihaila2013}, several machine learning algorithms are applied to recognize causality triggers such as "therefore", "because", "as a result of" etc..
+The approach is tested on BioCause and BioDRB corpora, which consist of articles with manually annotated causal relations between named entities in the biomedical domain. 
+Machine learning approach has also been applies by \cite{Pechsiri2010a} to extract causal relations in the agricultural domain. 
+These relations are then used to construct explanation knowledge graphs that represent the domain knowledge.
 
-Causal relations is one type of relations that can be used for LBD purposes. Other, more fine-grained types of relations has been identified as well. In the work by \cite{Zambach2010Lexical}, the authors identify and analyze verbs that express regulation relations, postive and negative, between processes and substances in biomedical domain. They propose that this knowledge can be used for automatic annotation of such relations in text. A somewhat similar types of relations has been proposed by \cite{Hashimoto2012Excitatory}. They identify excitory, inhibitory and neutral relations with corresponding set of extraction templates. More templates are acquired automatically by a bootstrapiing process. Excitatory relations are then used for extraction of contradictions, causality relations and genration of causality hypothesis.
+Causal relations is not the only type of relations that can be used for LBD purposes. 
+Other, more fine-grained types of relations has been identified as well. In the work by \cite{Zambach2010Lexical}, the authors identify and analyse verbs that express regulation relations, positive and negative, between processes and substances in biomedical domain. 
+They propose that this knowledge can be used for automatic annotation of such relations in text. A somewhat similar types of relations has been proposed by \cite{Hashimoto2012Excitatory}. 
+They identify excitatory, inhibitory and neutral relations with corresponding set of extraction templates. 
+More templates are acquired automatically by a bootstrapping process. 
+Excitatory relations are then used for extraction of contradictions, causality relations and generation of causality hypothesis.
+
+The current task differs from other text mining tasks in the type and structure of target relations. 
+In most text mining tasks, the goal is to extract binary relations holding between two objects such as $CAUSE(x,y)$, while we seek to extract variables, change events involving the variables, and causality/correlation relations holding between change events.  
 
 %=============================================================================
 \section{Annotation}
