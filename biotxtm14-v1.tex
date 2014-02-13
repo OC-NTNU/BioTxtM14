@@ -100,19 +100,22 @@ The extracted information can be indexed, thus allowing researchers to search fo
 
 \subsection{Relation extraction}
 
-For an NLP system to support LBD, automatic extraction of relations from text is required. In relation extraction, the causal relation is one of the most common target relations. 
-Causal relations are used in a range of tasks such as question answering, as well as LBD. 
+Causal relations is one of the most common target relations in text mining, and are used in a range of tasks, such as Question Answering.
 In the work by \cite{Mihaila2013}, several machine learning algorithms are applied to recognize causality triggers such as "therefore", "because", "as a result of" etc..
 The approach is tested on BioCause and BioDRB corpora, which consist of articles with manually annotated causal relations between named entities in the biomedical domain. 
-Machine learning approach has also been applies by \cite{Pechsiri2010a} to extract causal relations in the agricultural domain. 
+Machine learning approach has also been applied by \cite{Pechsiri2010a} to extract causal relations in the agricultural domain. 
 These relations are then used to construct explanation knowledge graphs that represent the domain knowledge.
 
-Causal relations is not the only type of relations that can be used for LBD purposes. 
-Other, more fine-grained types of relations has been identified as well. In the work by \cite{Zambach2010Lexical}, the authors identify and analyse verbs that express regulation relations, positive and negative, between processes and substances in biomedical domain. 
-They propose that this knowledge can be used for automatic annotation of such relations in text. A somewhat similar types of relations has been proposed by \cite{Hashimoto2012Excitatory}. 
+A set of relations that can be used to detect causality  has been proposed by \cite{Hashimoto2012Excitatory}. 
 They identify excitatory, inhibitory and neutral relations with corresponding set of extraction templates. 
 More templates are acquired automatically by a bootstrapping process. 
 Excitatory relations are then used for extraction of contradictions, causality relations and generation of causality hypothesis.
+
+Other approaches extract more fine-grained types of relations as well. 
+In the work by \cite{Zambach2010Lexical}, the authors identify and analyse verbs that express regulation relations, positive and negative, between processes and substances in biomedical domain. 
+They propose that this knowledge can be used for automatic annotation of such relations in text. 
+
+\EA{Maybe semrep should also be mentioned in more detail here?}
 
 The current task differs from other text mining tasks in the type and structure of target relations. 
 In most text mining tasks, the goal is to extract binary relations holding between two objects such as $CAUSE(x,y)$, while we seek to extract rules of the type: ``If variable X increases, than variable Y decreases'', which has a more complex structure than a binary relation.
