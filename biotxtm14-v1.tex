@@ -61,27 +61,15 @@ perturbation is enhanced.'' \cite{stocker2013climate}.
 Identifying such feedback processes is generally considered a crucial step in understanding and predicting phenomena like global warming.
 
 Unfortunately much potential knowledge regarding processes and their interactions is hidden in the scientific literature, scattered over journals catering to different scientific communities with relatively little communication among them.
-\newcite{Swanson1986Undiscovered} showed that this fragmentation of science lead to \emph{undiscovered public knowledge}, that is inferences  that can be made on basis of knowledge publicly available to the science, but have never been made because no research group has been aware of all the knowledge.
-As an example, he hypothesized that fish oils can cure Raynaud's disease by combining two publicly available statements: 1) Fish oils reduce blood viscosity, 2) patients with Raynaud's disease tend to exhibit high blood viscosity \cite{Swanson1986Fishoil}. 
+Given the vast and constantly growing nature of this body of literature, it is indeed hard for individual researchers to keep track of all relevant publications in their field of expertise, let alone of those in related or even more distant areas.   
+This paper presents the development of annotation guidelines as the first of three steps in the development of a discovery support system for researchers in this cross-disciplinary domain.
 
-
-Text mining of scientific literature may contribute to alleviating this problem \cite{Etzioni2011Search} .
-Earth, environmental and climate science may all benefit from automatic retrieval and extraction of processes and their interactions from scientific publications.
-The extracted information can be indexed, thus allowing researchers to search for interactions between processes in a much more effective way than with conventional keyword-based search engines.
-In addition, this structured information can be used for inference in discovery support systems.
-For example, pairs of cause and effect processes can be chained together, possibly in combination with existing domain knowledge, in order to suggest hypotheses about indirect interactions or feedback loops or to point out contradictory findings.
-
-Curently text mining in earth science, climate science and environmental science appears to be virtually non-existent. 
-As a first step in this direction, this paper explores the possibities for automatic extraction of relations between quantitative variables from raw text.
-The desired rules are of the type: ``If variable X increases, than variable Y decreases''.
-Following the lead of text mining initiatives in biomedicine \cite{Kim2009Overview}, we explore manual text annotation for creating annotated corpora, which can be used to train classifiers for automatic annotation, and ultimately automatic rule extraction. 
-In Section~\ref{sec:annot}, an annotion scheme is proposed to annotate the events of interest, namely, those of change, cause, correlation and feedback, as well as the entities involved in them.
+The next section starts off with discussing related work in discovery systems, event extraction and causal relation extraction.
+In Section~\ref{sec:annot}, an annotation scheme is proposed to annotate the events of interest, namely, those of change, cause, correlation and feedback, as well as the entities involved in them.
 Its purpose is to serve as an intermediary step in the process of rule extraction.
 It is shown in Section~\ref{sec:extraction} that such rules can indeed be automatically extracted from annotated text.
 Section~\ref{sec:discussion} discusses a range of open challenges, including automatic annotation, normalization of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
 The final Section~\ref{sec:conclusion} closes with conclusions and future work.
-Prior to that, the next Section starts off with discussing related work on event extraction and causal relation extraction.
-
 
 %=============================================================================
 \section{Related work}
@@ -92,8 +80,7 @@ Prior to that, the next Section starts off with discussing related work on event
 
 \subsection{Literature-based knowledge discovery}
 
-In a cross-disciplinary field, as knowledge regarding concepts and their relations are scattered across scientific communities with a limited degree of interaction, it is likely that there exists inferences that can be made on basis of existing knowledge, but have not been made, because no single research group has had the required knowledge to make the inference. 
-\newcite{Swanson1986Undiscovered} labelled these potential inferences \emph{undiscovered public knowledge}, and made the claim that they are ubiquitous in science. 
+\newcite{Swanson1986Undiscovered} showed that the fragmentation of science can give rise to so-called \emph{undiscovered public knowledge}, that is inferences that can be made based on publicly available knowledge, but have not been made because no researcher had been aware of all the facts. 
 As an example, he hypothesized that fish oils can cure Raynaud's disease by combining two publicly available statements: 1) Fish oils reduce blood viscosity, 2) patients with Raynaud's disease tend to exhibit high blood viscosity \cite{Swanson1986Fishoil}. 
 This method of inferring hypotheses of the form $A \to C$ based on publicly available statements $A \to B$ and $B \to C$ has been termed \emph{Swanson linking}\footnote{In the Swanson linking paradigm, the operator $\to$ is not interpreted as a logical conditional, but rather as an abstract causal or correlative relation between the terms. The conclusion $A \to C$ is therefore not logically sound, but has nevertheless been showed to give empirically useful results.}. 
 
@@ -103,8 +90,13 @@ Terms are usually extracted as n-grams from the text \cite{Lindsay1999LBDLexical
 
 Recently, co-occurrence based methods have come under critique for yielding imprecise results, as they fail to exploit the true structure of knowledge contained in scientific literature.
 \newcite{Hristovski2008NLPinLBD} therefore advocate a text mining based approach, where the relation extraction is used to discover relations between two concepts.
+This opens for more complex querying patterns than those allowed by Swanson linking.
 LBD efforts have traditionally been undertaken in the biomedical domain, and have therefore benefited from existing biomedical NLP tools such as SemRep\footnote{http://semrep.nlm.nih.gov/}.
-Application of text mining-based LBD techniques to less resourced domains would however require the development or adaptation of NLP tools, a goal which the current paper can be considered the first step towards. 
+Application of text mining-based LBD techniques to less resourced domains would however require the development or adaptation of text mining tools.
+
+Text mining can benefit researchers in the domain in other ways than improving LBD. 
+For instance, earth, environmental and climate science may all benefit from automatic retrieval and extraction of processes and their interactions from scientific publications\cite{Etzioni2011Search}.
+The extracted information can be indexed, thus allowing researchers to search for interactions between processes in a much more effective way than with conventional keyword-based search engines.
 
 \subsection{Relation extraction}
 
@@ -123,7 +115,10 @@ More templates are acquired automatically by a bootstrapping process.
 Excitatory relations are then used for extraction of contradictions, causality relations and generation of causality hypothesis.
 
 The current task differs from other text mining tasks in the type and structure of target relations. 
-In most text mining tasks, the goal is to extract binary relations holding between two objects such as $CAUSE(x,y)$, while we seek to extract variables, change events involving the variables, and causality/correlation relations holding between change events.  
+In most text mining tasks, the goal is to extract binary relations holding between two objects such as $CAUSE(x,y)$, while we seek to extract rules of the type: ``If variable X increases, than variable Y decreases'', which has a more complex structure than a binary relation.
+
+Currently text mining in earth science, climate science and environmental science appears to be virtually non-existent. 
+Following the lead of text mining initiatives in biomedicine \cite{Kim2009Overview}, we explore manual text annotation for creating annotated corpora, which can be used to train classifiers for automatic annotation, and ultimately automatic rule extraction.
 
 %=============================================================================
 \section{Annotation}
