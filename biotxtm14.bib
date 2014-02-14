@@ -17,7 +17,7 @@
     year = {2012}
 }
 
-@article{Mihaila2013BioCause,
+bib@article{Mihaila2013BioCause,
     abstract = {{BACKGROUND}:Biomedical corpora annotated with event-level information represent an important resource for domain-specific information extraction ({IE}) systems. However, bio-event annotation alone cannot cater for all the needs of biologists. Unlike work on relation and event extraction, most of which focusses on specific events and named entities, we aim to build a comprehensive resource, covering all statements of causal association present in discourse. Causality lies at the heart of biomedical knowledge, such as diagnosis, pathology or systems biology, and, thus, automatic causality recognition can greatly reduce the human workload by suggesting possible causal connections and aiding in the curation of pathway models. A biomedical text corpus annotated with such relations is, hence, crucial for developing and evaluating biomedical text {mining.RESULTS}:We have defined an annotation scheme for enriching biomedical domain corpora with causality relations. This schema has subsequently been used to annotate 851 causal relations to form {BioCause}, a collection of 19 open-access full-text biomedical journal articles belonging to the subdomain of infectious diseases. These documents have been pre-annotated with named entity and event information in the context of previous shared tasks. We report an inter-annotator agreement rate of over 60\% for triggers and of over 80\% for arguments using an exact match constraint. These increase significantly using a relaxed match setting. Moreover, we analyse and describe the causality relations in {BioCause} from various points of view. This information can then be leveraged for the training of automatic causality detection {systems.CONCLUSION}:Augmenting named entity and event annotations with information about causal discourse relations could benefit the development of more sophisticated {IE} systems. These will further influence the development of multiple tasks, such as enabling textual inference to detect entailments, discovering new facts and providing new hypotheses for experimental work.},
     author = {Mihaila, Claudiu and Ohta, Tomoko and Pyysalo, Sampo and Ananiadou, Sophia},
     citeulike-article-id = {11897213},
@@ -352,4 +352,52 @@
     title = {Modeling Semantic Containment and Exclusion in Natural Language Inference},
     url = {http://portal.acm.org/citation.cfm?id=1599147},
     year = {2008}
+}
+
+@article{Rindflesh2003SemRep,
+ author = {Rindflesh, Thomas C. and Fiszman, Marcelo},
+ title = {The Interaction of Domain Knowledge and Linguistic Structure in Natural Language Processing: Interpreting Hypernymic Propositions in Biomedical Text},
+ journal = {J. of Biomedical Informatics},
+ issue_date = {December 2003},
+ volume = {36},
+ number = {6},
+ month = dec,
+ year = {2003},
+ issn = {1532-0464},
+ pages = {462--477},
+ numpages = {16},
+ url = {http://dx.doi.org/10.1016/j.jbi.2003.11.003},
+ doi = {10.1016/j.jbi.2003.11.003},
+ acmid = {1008564},
+ publisher = {Elsevier Science},
+ address = {San Diego, USA},
+ keywords = {information extraction, knowledge representation, natural language processing, semantic processing},
+} 
+@article{Prasad2011Biomedical,
+    abstract = {
+                Identification of discourse relations, such as causal and contrastive relations, between situations mentioned in text is an important task for biomedical text-mining. A biomedical text corpus annotated with discourse relations would be very useful for developing and evaluating methods for biomedical discourse processing. However, little effort has been made to develop such an annotated resource.
+                We have developed the Biomedical Discourse Relation Bank ({BioDRB}), in which we have annotated explicit and implicit discourse relations in 24 open-access full-text biomedical articles from the {GENIA} corpus. Guidelines for the annotation were adapted from the Penn Discourse {TreeBank} ({PDTB}), which has discourse relations annotated over open-domain news articles. We introduced new conventions and modifications to the sense classification. We report reliable inter-annotator agreement of over 80\% for all sub-tasks. Experiments for identifying the sense of explicit discourse connectives show the connective itself as a highly reliable indicator for coarse sense classification (accuracy 90.9\% and F1 score 0.89). These results are comparable to results obtained with the same classifier on the {PDTB} data. With more refined sense classification, there is degradation in performance (accuracy 69.2\% and F1 score 0.28), mainly due to sparsity in the data. The size of the corpus was found to be sufficient for identifying the sense of explicit connectives, with classifier performance stabilizing at about 1900 training instances. Finally, the classifier performs poorly when trained on {PDTB} and tested on {BioDRB} (accuracy 54.5\% and F1 score 0.57).
+                Our work shows that discourse relations can be reliably annotated in biomedical text. Coarse sense disambiguation of explicit connectives can be done with high reliability by using just the connective as a feature, but more refined sense classification requires either richer features or more annotated data. The poor performance of a classifier trained in the open domain and tested in the biomedical domain suggests significant differences in the semantic usage of connectives across these domains, and provides robust evidence for a biomedical sublanguage for discourse and the need to develop a specialized biomedical discourse annotated corpus. The results of our cross-domain experiments are consistent with related work on identifying connectives in {BioDRB}.
+            },
+    author = {Prasad, Rashmi and McRoy, Susan and Frid, Nadya and Joshi, Aravind and Yu, Hong},
+    citeulike-article-id = {9334048},
+    citeulike-linkout-0 = {http://dx.doi.org/10.1186/1471-2105-12-188},
+    citeulike-linkout-1 = {http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3130691/},
+    citeulike-linkout-2 = {http://view.ncbi.nlm.nih.gov/pubmed/21605399},
+    citeulike-linkout-3 = {http://www.hubmed.org/display.cgi?uids=21605399},
+    day = {23},
+    doi = {10.1186/1471-2105-12-188},
+    issn = {1471-2105},
+    journal = {BMC bioinformatics},
+    month = may,
+    number = {1},
+    pages = {188+},
+    pmcid = {PMC3130691},
+    pmid = {21605399},
+    posted-at = {2014-02-14 18:33:16},
+    priority = {2},
+    title = {The biomedical discourse relation bank.},
+    url = {http://dx.doi.org/10.1186/1471-2105-12-188},
+    volume = {12},
+    year = {2011}
 }
