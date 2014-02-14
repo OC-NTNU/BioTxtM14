@@ -6,9 +6,9 @@
 \usepackage{linguex}
 \usepackage{amssymb}
 
-\usepackage{todonotes}
+%\usepackage{todonotes}
 % To hide all notes use 
-%\usepackage[disable]{todonotes}
+\usepackage[disable]{todonotes}
 
 
 \title{Towards text mining in earth science:\\
@@ -26,10 +26,10 @@ This paper addresses text mining in the cross-disciplinary domain of earth scien
 It is motivated by the desire for literature-based knowledge discovery from scientific publications.
 The particular goal is to automatically extract relations between quantitative variables from raw text.
 This results in rules of the form ``If variable X increases, than variable Y decreases''.    
-As a first step in this direction, an annotion scheme is proposed to capture the events of interest -- those of change, cause, correlation and feedback -- and the entities involved in them -- quantitative variables.
+As a first step in this direction, an annotation scheme is proposed to capture the events of interest -- those of change, cause, correlation and feedback -- and the entities involved in them -- quantitative variables.
 Its purpose is to serve as an intermediary step in the process of rule extraction.
 It is shown that the desired rules can indeed be automatically extracted from annotated text.
-A number of open challenges are discussed, including automatic annotation, normalization of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
+A number of open challenges are discussed, including automatic annotation, normalisation of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
 \\ \newline 
 \Keywords{Text Mining, Literature-based Discovery, Earth Science, Environmental Science, Climate Science, Corpus Annotation, Relation Extraction, Event Extraction}}
 
@@ -91,7 +91,7 @@ However, adapting such tools to less resourced domains, such as earth science, i
 
 Other work has concentrated on relation and event extraction through machine learning. 
 Causal relations are one of the most commonly targeted relations.
-In \cite{Mihaila2013}, several machine learning algorithms are applied to recognize causality triggers such as \emph{therefore}, \emph{because}, \emph{as a result of}, etc.
+In \cite{Mihaila2013}, several machine learning algorithms are applied to recognise causality triggers such as \emph{therefore}, \emph{because}, \emph{as a result of}, etc.
 The approach is tested on BioCause \cite{Mihaila2013BioCause} and BioDRB \cite{Prasad2011Biomedical} corpora, which consist of articles with manually annotated causal relations between named entities in the biomedical domain. 
 A machine learning approach has also been applied by \newcite{Pechsiri2010a} to extract causal relations in the agricultural domain, which are then used to construct explanation knowledge graphs that represent the domain knowledge.
 Supervised learning requires domain-specific training material though, which is currently lacking in our domain of earth science.
@@ -117,7 +117,7 @@ Following the lead of text mining initiatives in biomedicine \cite{Kim2009Overvi
 In Section~\ref{sec:annot}, an annotation scheme is proposed to annotate the events of interest --  those of change, cause, correlation and feedback -- as well as the entities involved in them.
 Its purpose is to serve as an intermediary step in the process of rule extraction.
 It is shown in Section~\ref{sec:extraction} that such rules can indeed be automatically extracted from annotated text.
-Section~\ref{sec:discussion} discusses a range of open challenges, including automatic annotation, normalization of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
+Section~\ref{sec:discussion} discusses a range of open challenges, including automatic annotation, normalisation of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
 The final Section~\ref{sec:conclusion} lists conclusions and future work.
 
 
@@ -131,10 +131,10 @@ The final Section~\ref{sec:conclusion} lists conclusions and future work.
 The data consisted of 12 abstracts (2369 words) from recent, high-quality scientific journal publications about the relation between climate and ocean changes. 
 These were selected by our domain expert (author MVA) as a reasonably representative sample of the text type in the targeted area, comprising multi-disciplinary work in marine biology, marine chemistry, oceanography, environmental science, climate science, biogeoscience and geophysics.
 Text was automatically extracted from PDF files.
-Abstracts were manually extracted, tokenized and split into sentences, also allowing for manual correction of minor PDF-to-text conversion errors.
+Abstracts were manually extracted, tokenised and split into sentences, also allowing for manual correction of minor PDF-to-text conversion errors.
 
 Annotation was carried out using the Brat annotation tool \cite{stenetorp2012}.
-The annotion scheme described below was developed in an iterative fashion in close colaboration with our domain expert.
+The annotation scheme described below was developed in an iterative fashion in close collaboration with our domain expert.
 It is inspired by annotation efforts in the biomedical domain such as the GENIA corpus \cite{Kim2003GENIA} and the corpora used in the BioNLP shared tasks on event extraction \cite{Kim2009Overview}.
 It covers a particular type of events -- those of change, cause, correlation and feedback -- and the entities involved in them -- quantitative variables.
 The primary reason of annotation is not to analyse the text according to some linguistic formalism or theory, or to follow some knowledge representation formalism or ontological theory.
@@ -172,7 +172,7 @@ The text span in \Last[b] admittedly identifies something that is changing, but 
 The ones in \Last[c] express a static state rather than a dynamic event.
 The reason for excluding cases like these is that they do not lead to useful rules about the relation between quantitative variables.
 
-Variables must be indicated as precisely as possible, that is,including any relevant specifications, modifications or conditions. So instead of \Next[a], \Next[b] is prefered.
+Variables must be indicated as precisely as possible, that is,including any relevant specifications, modifications or conditions. So instead of \Next[a], \Next[b] is preferred.
 
 \ex.
   \a. *a difference in [\emph{carbon concentration}] between the ocean surface and the deep waters
@@ -180,7 +180,7 @@ Variables must be indicated as precisely as possible, that is,including any rele
 
 The choice is motivated by the idea that, given a syntactic parse, it is usually easier to generalize a complex argument by stripping modifiers than the other way around.  
 
-Variables are tagged with the label \tag{Variable}. It is most likely advantaguous to distinguish different subclasses of variables. Currently we are not concerned with this. 
+Variables are tagged with the label \tag{Variable}. It is most likely advantageous to distinguish different subclasses of variables. Currently we are not concerned with this. 
 However, we do not exclude the possibility of a more fine-grained annotation at a later stage. 
 
 
@@ -204,7 +204,7 @@ Changes must apply to a variable; hence the text span in \Next does not trigger 
 Events of increase, decrease and undirected changes are tagged as \tag{Increase}, \tag{Decrease} and \tag{Change} respectively. 
 Events are related to variables through thematic roles, which specify the different participants in the event. 
 Change events must always have a \tag{Theme} role that is filled by the variable that is changing.
-Typical annotation examples are therefore:\footnote{We use labeled brackets to denote enitities, events or thematic roles, depending on the context of discussion.}
+Typical annotation examples are therefore:\footnote{We use labeled brackets to denote entities, events or thematic roles, depending on the context of discussion.}
 
 \exi.
   \a. [\tag{Decrease} reduced] [\tag{Theme} calcite production]
@@ -298,8 +298,8 @@ Feedback events hold between two variables, filling the roles of \tag{Theme} and
 
 \exi. our model suggests the existence of [\tag{+Feedback} a positive feedback between] [\tag{Theme} temperature] and [\tag{Co-theme} atmospheric CO2 content]
 
-Analogously to change events, feedback events can positive (self-sustaining, self-enhancing), negative (self-stabilizing, self-diminishing) or of unspecified polarity.
-Positive or negative feedback are annotated with an attributue whenever a trigger is present. 
+Analogously to change events, feedback events can positive (self-sustaining, self-enhancing), negative (self-stabilising, self-diminishing) or of unspecified polarity.
+Positive or negative feedback are annotated with an attribute whenever a trigger is present. 
 
 \subsubsection{Referring expressions}
 
@@ -327,7 +327,7 @@ Likewise, two increasing events are combined to serve as the theme in a causal e
 
 The alternative option in \Last[a] is to tag the whole combined phrase as a single variable.
 We chose not do so because coordination is notoriously hard problem for syntactic parsers and any help from the annotation in resolving ambiguity should be exploited.
-Notice also that a similar option is not availabe in \Last[b], as considering the whole combination as a single change event would result in loss of substantial information.
+Notice also that a similar option is not available in \Last[b], as considering the whole combination as a single change event would result in loss of substantial information.
 
 
 \subsubsection{Negation}
@@ -346,7 +346,7 @@ Triggers for negation are currently not explicitly annotated.
 %=============================================================================
 \label{sec:extraction}
 
-The proposed annotation allows for autamatic extraction of rules about the relations between quantitative variables.
+The proposed annotation allows for automatic extraction of rules about the relations between quantitative variables.
 There are three main types of rules: causal rules, correlation rules and feedback rules.
 
 Causal rules are of the type ``If variable X changes, than variable Y changes''.
@@ -361,7 +361,7 @@ Another source for causal rules is change events with both \tag{Agent} and \tag{
 
 Correlation rules are of the type ``Changes in variable X correlate with changes in variable Y'', as exemplified in Figure~\ref{fig:ex2}.
 The curly arrow `$\leadsto$' is used to indicate the relation between a independent and a dependent variable.
-These rules are extracted from \tag{Corelate} events, using their \tag{Co-theme} role as the independent variable (LHS of the rule) and their \tag{Theme} role as the dependent variable (RHS of the rule). 
+These rules are extracted from \tag{Correlate} events, using their \tag{Co-theme} role as the independent variable (LHS of the rule) and their \tag{Theme} role as the dependent variable (RHS of the rule). 
 
 Feedback rules, an example of which is shown in Figure~\ref{fig:ex3}, are of the form: ``Changes in variable X feed back through changes in variable Y''.
 The feedback relation is denoted by a double sided arrow `$\Longleftrightarrow$', optionally with a superscripted '+' or '-' for positive and negative feedback respectively.
@@ -370,7 +370,7 @@ Notice that conceptually a feedback relation is assumed to hold between changing
 However, often there is no explicit trigger for a change event present in the text.
 For example, in the annotation in Figure~\ref{fig:ex3}, both roles are filled by variables instead of change events.
 Such variables are therefore 'promoted' to change events during rule extraction, resulting in `$\updownarrow$ temperature' and `$\updownarrow$ marine primary production'.
-Similar promotion apply occassionaly to variables in events of change, cause or correlation.
+Similar promotion apply occasionally to variables in events of change, cause or correlation.
 
 
 \setlength{\fboxsep}{10pt}
@@ -414,7 +414,7 @@ Similar promotion apply occassionaly to variables in events of change, cause or 
 %=============================================================================
 \label{sec:discussion}
  
-The annotation scheme proposed below seems a good candidate for the pupose of rule extraction.
+The annotation scheme proposed below seems a good candidate for the purpose of rule extraction.
 However, it has only been tried on a small set of abstracts and it remains to be seen how it holds up when applied to more text.
 Inter-annotator agreement has not been measured so far.
 In addition to this, we are also considering a type of evaluation in which extracted rules and their corresponding source texts are shown to domain experts, who are then asked to judge to what extent the rule is entailed by the text. 
@@ -428,9 +428,9 @@ supervised extraction system, though at substantially lower recall.
 This suggests that at least a part of the annotation can be accelerated with the help of such tools.
 
 A second strategy to reduce annotation costs involves the use of active learning, which is a training method for supervised learners that tries to obtain maximal gain with minimal annotation effort \cite{Olsson09}.
-It is an iterative procedure, starting with a small amount of labeled data and a large amount of unlabeled data.
-In each iteration, a classifier is trained on the labeled data and subsequently applied to the unlabeled data.
-The most informative instances -- e.g., those for which classification confidence is lowests -- are passed on to a human annotator for manual annotation.
+It is an iterative procedure, starting with a small amount of labeled data and a large amount of unlabelled data.
+In each iteration, a classifier is trained on the labeled data and subsequently applied to the unlabelled data.
+The most informative instances -- e.g., those for which classification confidence is lowest -- are passed on to a human annotator for manual annotation.
 The manually labeled instances are added to the training data and the procedure is repeated.
 Good results have been reported with the use of active learning, e.g. \cite{gamback2011active}.
 
@@ -438,9 +438,9 @@ The extracted rules expressing relations of correlation, causality or feedback b
 One use case is to search for other variables directly related to a certain variable of interest.
 For example, find all processes that affect or are affected by a rise in atmospheric CO2 level.
 The variable in question may be expressed in many different ways though, for example, as \emph{CO2}, \emph{atmospheric CO2}, \emph{CO2 concentrations} or \emph{CO2 partial pressures}, but not as \emph{ CO2 levels in oceanic surface waters} or \emph{the distribution of CO2 between the atmosphere and the ocean}.
-Simple string matching between the variables in queries to those in rules will given limited recall and precison.
+Simple string matching between the variables in queries to those in rules will given limited recall and precision.
 Related to this is the issue of differences in terminology across research fields.
-For instance, \emph{export production} and \emph{biological pump} are different terms, used by chemists and biologists repspectively, for the same process of carbon cycling in the oceans. 
+For instance, \emph{export production} and \emph{biological pump} are different terms, used by chemists and biologists respectively, for the same process of carbon cycling in the oceans. 
 One possible strategy to cope with this issue is to normalize all relevant entities by linking them to a unique concept in an ontology \cite{Bada2012Concept}.
 However, whereas the concepts of interest in biomedicine are relatively well understood -- including entities such cells, proteins and genes -- and covered by widely used ontologies, earth science currently seems to lack a similar common ground.
 
@@ -465,8 +465,8 @@ Proper modelling of rule context would require a rather deep understanding of th
 For now, we plan to leave this to the user by offering facilities in the user interface to quickly inspect the source text for each rule.
 
 Inference with rules may be further enhanced by exploiting domain knowledge.
-For example, given an ontology which contains the fact that \emph{diatoms} are a kind of \emph{phytoplankton}, rules containing either of the terms may be generalized by substituting the hypernym or specialized by substituting the hyponym.
-In a similar vein, rules can be generalized by removing specifiers, modifiers or parts of a conjunction.
+For example, given an ontology which contains the fact that \emph{diatoms} are a kind of \emph{phytoplankton}, rules containing either of the terms may be generalised by substituting the hypernym or specialised by substituting the hyponym.
+In a similar vein, rules can be generalised by removing specifiers, modifiers or parts of a conjunction.
 Whether or not this constitutes valid inference seems connected to recent developments in textual entailment, in particular work on natural logic \cite{MacCartney2008Modeling}.
     
 
@@ -475,11 +475,11 @@ Whether or not this constitutes valid inference seems connected to recent develo
 %=============================================================================
 \label{sec:conclusion}
 
-An annotion scheme was proposed to capture events of change, cause, correlation and feedback, as well as  the entities involved in them, in the cross-disciplinary domain of earth science, environmental science and climate science.
+An annotation scheme was proposed to capture events of change, cause, correlation and feedback, as well as  the entities involved in them, in the cross-disciplinary domain of earth science, environmental science and climate science.
 It was shown that rules about the relation between changing processes can be automatically extracted from annotated text.
-Follow up work will involve annotating more text, measuring interannotator agreement and rule adequacy.
+Follow up work will involve annotating more text, measuring inter-annotator agreement and rule adequacy.
 Next, tools for automatic annotation will be developed.
-Future work will also address normalization of entities, tracking of entity mentions, modelling of rule context and combination with domain knowledge. 
+Future work will also address normalisation of entities, tracking of entity mentions, modelling of rule context and combination with domain knowledge. 
 
  
 %=============================================================================
