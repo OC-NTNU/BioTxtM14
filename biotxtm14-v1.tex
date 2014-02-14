@@ -419,12 +419,20 @@ However, it has only been tried on a small set of abstracts and it remains to be
 Inter-annotator agreement has not been measured so far.
 In addition to this, we are also considering a type of evaluation in which extracted rules and their corresponding source texts are shown to domain experts, who are then asked to judge to what extent the rule is entailed by the text. 
 
-\todo[inline]{Automatic annotation:
-What aproach do we intend to use?
-Generic, unsupervised open IE vs dedicated supervised system?
-How well do we think this is going to work?
-Bootstrapping and active learning to save annotation costs?
-}
+Manual annotation is costly. There are at least two strategies which may reduce annotation time and costs. 
+The first one is to bootstrap from existing extraction systems.
+Recent advances in open information extraction, where there is no predefined set of entities and relations, have resulted in systems like ReVerb \cite{Fader2011Identifying} and it successor OpenIE.
+\newcite{Banko2008Tradeoffs} claim that when the number of target relations is small, and their
+names are known in advance, an open IE system is able to match the precision of a traditional
+supervised extraction system, though at substantially lower recall.
+This suggests that at least a part of the annotation can be accelerated with the help of such tools.
+
+A second strategy to reduce annotation costs involves the use of active learning, which is a training method for supervised learners that tries to obtain maximal gain with minimal annotation effort \cite{Olsson09}.
+It is an iterative procedure, starting with a small amount of labeled data and a large amount of unlabeled data.
+In each iteration, a classifier is trained on the labeled data and subsequently applied to the unlabeled data.
+The most informative instances -- e.g., those for which classification confidence is lowests -- are passed on to a human annotator for manual annotation.
+The manually labeled instances are added to the training data and the procedure is repeated.
+Good results have been reported with the use of active learning, e.g. \cite{gamback2011active}.
 
 The extracted rules expressing relations of correlation, causality or feedback between quantitative variables are intended to be used in knowledge discovery support systems.
 One use case is to search for other variables directly related to a certain variable of interest.
