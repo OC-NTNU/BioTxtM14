@@ -62,53 +62,59 @@ Identifying such feedback processes is generally considered a crucial step in un
 
 Unfortunately much potential knowledge regarding processes and their interactions is hidden in the scientific literature, scattered over journals catering to different scientific communities with relatively little communication among them.
 Given the vast and constantly growing nature of this body of literature, it is indeed hard for individual researchers to keep track of all relevant publications in their field of expertise, let alone of those in related or even more distant areas.   
+
 Text mining of scientific literature may contribute to alleviating this problem \cite{Etzioni2011Search} .
 Earth, environmental and climate science may all benefit from automatic retrieval and extraction of processes and their interactions from scientific publications.
 The extracted information can be indexed, thus allowing researchers to search for interactions between processes in a much more effective way than with conventional keyword-based search engines.
 
 In addition, this structured information can be used for inference in discovery support systems.
 For example, pairs of cause and effect processes can be chained together, possibly in combination with existing domain knowledge, in order to suggest hypotheses about indirect interactions or feedback loops or to point out contradictory findings.
-Such discovery of implicit knowledge in a body of literature is the goal for the field of Literature-based discovery (LBD).
-The first results in LBD were produced by \cite{Swanson1986Fishoil}, who combined two publicly available knowledge fragments: 1) Fish oils reduce blood viscosity, 2) patients with Raynaud's disease tend to exhibit high blood viscosity to form the hypothesis that fish oils treat Raynaud's disease.
+Such discovery of implicit knowledge in a body of literature is aimed for in the field of \emph{literature-based discovery} (LBD).
+The first results in LBD were produced by \cite{Swanson1986Fishoil} through manually executing a search algorithm based on co-occurrence statistics of terms. 
+This allowed him to combine two publicly available knowledge fragments: (1) Fish oils reduce blood viscosity, (2) patients with Raynaud's disease tend to exhibit high blood viscosity. 
+He combined these two to form the hypothesis that fish oils treat Raynaud's disease.
 The hypothesis was later confirmed experimentally. 
 Even though both knowledge fragments were publicly available to any researcher, nobody had been aware of both knowledge fragments and made the connection.
-The aim of LBD is to create systems that provide discovery support to uncover such potential hypotheses that Swanson referred to as \emph{undiscovered public knowledge} \cite{Swanson1986Undiscovered}.
-Most LBD methods are based on chaining of underspecified relations, and use term co-occurrence frequencies as a heuristic whether a relation holds between two terms.
+
+The aim of LBD is to create systems that provide discovery support to uncover such potential hypotheses, which Swanson referred to as \emph{undiscovered public knowledge} \cite{Swanson1986Undiscovered}.
+Most LBD methods are based on chaining of unspecified relations, using term co-occurrence frequencies as a heuristic for whether a relation holds between two terms.
 Terms are usually extracted as n-grams from the text \cite{Lindsay1999LBDLexicalStat} or taken from a controlled vocabulary or ontology \cite{Weeber2001ConceptsInLBD}.
 
 Recently, co-occurrence based LBD methods have come under critique for yielding imprecise results, as they fail to exploit the true breadth of knowledge contained in the scientific literature.
 \newcite{Hristovski2008NLPinLBD} therefore advocate a text mining based approach, where the relation extraction is used to discover precise relations between two concepts.
-This opens for more complex query patterns.
-LBD efforts have traditionally been undertaken in the biomedical domain, and have therefore benefited from existing biomedical NLP tools such as SemRep (details below)
-Application of text mining-based LBD techniques to less resourced domains would however require the development or adaptation of text mining tools.
+This enables more complex query patterns.
 
-Currently text mining in earth science, climate science and environmental science appears to be virtually non-existent. 
-Following the lead of text mining initiatives in biomedicine \cite{Kim2009Overview}, we explore manual text annotation for creating annotated corpora, which can be used to train classifiers for automatic annotation, and ultimately automatic rule extraction.
+LBD efforts along these lines in the biomedical domain have taken advantage of existing tools such as SemRep \cite{Rindflesch2003SemRep}.
+SemRep is a major text mining system for the biomedical domain that exploits structured domain knowledge found in the Unified Medical Language System (UMLS)\footnote{http://www.nlm.nih.gov/research/umls/}. 
+The UMLS consists of three tools: A lexicon, a semantic network and a meta-thesaurus. 
+Using underspecified symbolic language processing, SemRep is able to extract a wide range of specific relations, such as TREATS, HAS\_PART and LOCATION\_OF.
+However, adapting such tools to less resourced domains, such as earth science, is difficult because of the lack of resources like UMLS and because of the knowledge, time and effort required for writing extraction rules.
 
-\EA{START CAUSAL RELATION EXTRACTION}
-Causal relations is one of the most common target relations in text mining, and are used in a range of tasks, such as Question Answering.
-In the work by \cite{Mihaila2013}, several machine learning algorithms are applied to recognize causality triggers such as "therefore", "because", "as a result of" etc..
+Other work has concentrated on relation ond event extraction through machine learning. 
+Causal relations are one of the most commonly targeted relations.
+In \cite{Mihaila2013}, several machine learning algorithms are applied to recognize causality triggers such as \emph{therefore}, \emph{because}, \emph{as a result of}, etc.
 The approach is tested on BioCause and BioDRB corpora, which consist of articles with manually annotated causal relations between named entities in the biomedical domain. 
-Machine learning approach has also been applied by \cite{Pechsiri2010a} to extract causal relations in the agricultural domain. 
-These relations are then used to construct explanation knowledge graphs that represent the domain knowledge.
+A machine learning approach has also been applied by \cite{Pechsiri2010a} to extract causal relations in the agricultural domain, which are then used to construct explanation knowledge graphs that represent the domain knowledge.
+Supervised learning requires domain-specific training material though, which is currently lacking in our domain of earth science.
 
-A set of relations that can be used to detect causality  has been proposed by \cite{Hashimoto2012Excitatory}. 
-They identify excitatory, inhibitory and neutral relations with corresponding set of extraction templates. 
+An alternative approach may be the use of unsupervised learning and clustering techniques. 
+As an example of unsupervised techniques for causal relation extraction, \cite{Hashimoto2012Excitatory} propose a set of relations that can be used to detect causality. 
+They identify excitatory, inhibitory and neutral relations with a corresponding set of extraction templates. 
 More templates are acquired automatically by a bootstrapping process. 
-Excitatory relations are then used for extraction of contradictions, causality relations and generation of causality hypothesis.
+Excitatory relations are then used for extraction of contradictions, causality relations and generation of causality hypotheses.
+A disadvantage of these approaches is that their performance is generally far less accurate than that of supervised methods.
+In addition, it seems they are not capable of covering the more complex events of changing processes and their interactions, as we are interested in here. 
 
-Other approaches extract more fine-grained types of relations as well. 
-In the work by \cite{Zambach2010Lexical}, the authors identify and analyse verbs that express regulation relations, positive and negative, between processes and substances in biomedical domain. 
-They propose that this knowledge can be used for automatic annotation of such relations in text. 
+Other approaches have explored extraction of more fine-grained types of relations, including those of increase and decrease. 
+\cite{Zambach2010Lexical} identify and linguistically analyse verbs that express regulation relations, positive and negative, between processes and substances in the biomedical domain. 
+They suggest that their analysis can benefit extraction of, as well as reasoning over, these relations in the biomedical domain, although no implementation or evaluation was carried out.
 
-SemRep is a major text mining system for the biomedical domain \cite{Rindflesch2003SemRep}. SemRep exploits structured domain knowledge found in the Unified Medical Language System (UMLS)\footnote{http://www.nlm.nih.gov/research/umls/}. The UMLS consists of three tools: A lexicon, a semantic network and a meta-thesaurus. Using underspecified symbolic language processing, SemRep is able to extracts a wide range of specific relations, such as TREATS, HAS\_PART and LOCATION\_OF.
-\EA{END CAUSAL RELATION EXTRACTION}
-
-The current task differs from other text mining tasks in the type and structure of target relations. 
-In most text mining tasks, the goal is to extract binary relations holding between two objects such as $CAUSE(x,y)$, while we seek to extract rules of the type: ``If variable X increases, than variable Y decreases'', which has a more complex structure than a binary relation.
-It therefore seems unlikely that we can employ existing text mining tools.
-
-As a first step towards developing text mining tools in this domain, we explore manual text annotation for creating annotated corpora, which can be used to train classifiers for automatic annotation, and ultimately automatic rule extraction.
+In sum, currently text mining in earth science, climate science and environmental science appears to be virtually non-existent.
+Our research agenda targets developing text mining in this area, in particular towards applications in LBD.
+Existing approaches and tools from other domains such as biomedicine are not readily applicable and
+do not provide extraction of the type of processes and interactions needed for our purposes.  
+Development of domain-specific event extraction tools is therefore high our agenda.
+Following the lead of text mining initiatives in biomedicine \cite{Kim2009Overview}, we explore manual text annotation for creating annotated corpora, which can be used to train classifiers for automatic annotation, and ultimately automatic rule extraction.
 In Section~\ref{sec:annot}, an annotation scheme is proposed to annotate the events of interest, namely, those of change, cause, correlation and feedback, as well as the entities involved in them.
 Its purpose is to serve as an intermediary step in the process of rule extraction.
 It is shown in Section~\ref{sec:extraction} that such rules can indeed be automatically extracted from annotated text.
