@@ -79,28 +79,13 @@ Terms are usually extracted as n-grams from the text \cite{Lindsay1999LBDLexical
 Recently, co-occurrence based LBD methods have come under critique for yielding imprecise results, as they fail to exploit the true breadth of knowledge contained in the scientific literature.
 \newcite{Hristovski2008NLPinLBD} therefore advocate a text mining based approach, where the relation extraction is used to discover precise relations between two concepts.
 This opens for more complex query patterns.
-LBD efforts have traditionally been undertaken in the biomedical domain, and have therefore benefited from existing biomedical NLP tools such as SemRep\footnote{http://semrep.nlm.nih.gov/}.
+LBD efforts have traditionally been undertaken in the biomedical domain, and have therefore benefited from existing biomedical NLP tools such as SemRep (details below)
 Application of text mining-based LBD techniques to less resourced domains would however require the development or adaptation of text mining tools.
 
 Currently text mining in earth science, climate science and environmental science appears to be virtually non-existent. 
 Following the lead of text mining initiatives in biomedicine \cite{Kim2009Overview}, we explore manual text annotation for creating annotated corpora, which can be used to train classifiers for automatic annotation, and ultimately automatic rule extraction.
 
-\EM{Causal relation extraction}
-
-The current task differs from other text mining tasks in the type and structure of target relations. 
-In most text mining tasks, the goal is to extract binary relations holding between two objects such as $CAUSE(x,y)$, while we seek to extract rules of the type: ``If variable X increases, than variable Y decreases'', which has a more complex structure than a binary relation.
-It therefore seems unlikely that we can employ existing text mining tools.
-
-As a first step towards developing text mining tools in this domain, we explore manual text annotation for creating annotated corpora, which can be used to train classifiers for automatic annotation, and ultimately automatic rule extraction.
-In Section~\ref{sec:annot}, an annotation scheme is proposed to annotate the events of interest, namely, those of change, cause, correlation and feedback, as well as the entities involved in them.
-Its purpose is to serve as an intermediary step in the process of rule extraction.
-It is shown in Section~\ref{sec:extraction} that such rules can indeed be automatically extracted from annotated text.
-Section~\ref{sec:discussion} discusses a range of open challenges, including automatic annotation, normalization of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
-The final Section~\ref{sec:conclusion} closes with conclusions and future work.
-
-
-\subsection{Relation extraction}
-
+\EA{START CAUSAL RELATION EXTRACTION}
 Causal relations is one of the most common target relations in text mining, and are used in a range of tasks, such as Question Answering.
 In the work by \cite{Mihaila2013}, several machine learning algorithms are applied to recognize causality triggers such as "therefore", "because", "as a result of" etc..
 The approach is tested on BioCause and BioDRB corpora, which consist of articles with manually annotated causal relations between named entities in the biomedical domain. 
@@ -116,9 +101,19 @@ Other approaches extract more fine-grained types of relations as well.
 In the work by \cite{Zambach2010Lexical}, the authors identify and analyse verbs that express regulation relations, positive and negative, between processes and substances in biomedical domain. 
 They propose that this knowledge can be used for automatic annotation of such relations in text. 
 
-\EA{Maybe semrep should also be mentioned in more detail here?}
+SemRep is a major text mining system for the biomedical domain \cite{Rindflesch2003SemRep}. SemRep exploits structured domain knowledge found in the Unified Medical Language System (UMLS)\footnote{http://www.nlm.nih.gov/research/umls/}. The UMLS consists of three tools: A lexicon, a semantic network and a meta-thesaurus. Using underspecified symbolic language processing, SemRep is able to extracts a wide range of specific relations, such as TREATS, HAS\_PART and LOCATION\_OF.
+\EA{END CAUSAL RELATION EXTRACTION}
 
+The current task differs from other text mining tasks in the type and structure of target relations. 
+In most text mining tasks, the goal is to extract binary relations holding between two objects such as $CAUSE(x,y)$, while we seek to extract rules of the type: ``If variable X increases, than variable Y decreases'', which has a more complex structure than a binary relation.
+It therefore seems unlikely that we can employ existing text mining tools.
 
+As a first step towards developing text mining tools in this domain, we explore manual text annotation for creating annotated corpora, which can be used to train classifiers for automatic annotation, and ultimately automatic rule extraction.
+In Section~\ref{sec:annot}, an annotation scheme is proposed to annotate the events of interest, namely, those of change, cause, correlation and feedback, as well as the entities involved in them.
+Its purpose is to serve as an intermediary step in the process of rule extraction.
+It is shown in Section~\ref{sec:extraction} that such rules can indeed be automatically extracted from annotated text.
+Section~\ref{sec:discussion} discusses a range of open challenges, including automatic annotation, normalization of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
+The final Section~\ref{sec:conclusion} closes with conclusions and future work.
 
 
 %=============================================================================
