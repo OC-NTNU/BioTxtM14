@@ -11,7 +11,7 @@
 \usepackage[disable]{todonotes}
 
 
-\title{Towards text mining in earth science:\\
+\title{Towards text mining in climate science:\\
 extraction of quantitative variables and their relations}
 
 \name{Author1, Author2, Author3}
@@ -22,7 +22,7 @@ extraction of quantitative variables and their relations}
 
 
 \abstract{
-This paper addresses text mining in the cross-disciplinary domain of earth science, environmental science and climate science.
+This paper addresses text mining in the cross-disciplinary fields of climate science, marine science and environmental science.
 It is motivated by the desire for literature-based knowledge discovery from scientific publications.
 The particular goal is to automatically extract relations between quantitative variables from raw text.
 This results in rules of the form ``If variable X increases, than variable Y decreases''.    
@@ -31,7 +31,7 @@ Its purpose is to serve as an intermediary step in the process of rule extractio
 It is shown that the desired rules can indeed be automatically extracted from annotated text.
 A number of open challenges are discussed, including automatic annotation, normalisation of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
 \\ \newline 
-\Keywords{Text Mining, Literature-based Discovery, Earth Science, Environmental Science, Climate Science, Corpus Annotation, Relation Extraction, Event Extraction}}
+\Keywords{Text Mining, Literature-based Discovery, Climate Science, Marine Science, Environmental Science, Corpus Annotation, Relation Extraction, Event Extraction}}
 
 \newcommand{\tag}[1]{\textsc{#1}}
 
@@ -52,7 +52,7 @@ A number of open challenges are discussed, including automatic annotation, norma
 \section{Introduction}
 %=============================================================================
 
-One of the characteristics of the cross-disciplinary fields of earth science, environmental science and climate science is the existence of many different processes that affect each other in direct and indirect ways, resulting in highly complex systems.
+One of the characteristics of the cross-disciplinary fields of climate science, marine science and environmental science is the existence of many different processes that affect each other in direct and indirect ways, resulting in highly complex systems.
 In climate science, for example, \emph{climate feedback} is defined as ``An interaction in which a perturbation in one climate quantity causes a change in a second, and the change in the
 second quantity ultimately leads to an additional change in the first. 
 A negative feedback is one in which the initial perturbation is weakened
@@ -64,7 +64,7 @@ Unfortunately much potential knowledge regarding processes and their interaction
 Given the vast and constantly growing nature of this body of literature, it is indeed hard for individual researchers to keep track of all relevant publications in their field of expertise, let alone of those in related or even more distant areas.   
 
 Text mining of scientific literature may contribute to alleviating this problem \cite{Etzioni2011Search}.
-Earth, environmental and climate science may all benefit from automatic extraction of processes and their interactions from scientific publications.
+Climate, marine and environmental science may all benefit from automatic extraction of processes and their interactions from scientific publications.
 Extracted information can be indexed, thus allowing researchers to search for interactions between processes in a much more effective way than with conventional keyword-based search engines.
 
 In addition, this structured data can be used for inference in discovery support systems.
@@ -87,14 +87,14 @@ LBD efforts along these lines in the biomedical domain have taken advantage of e
 SemRep is a major text mining system for the biomedical domain that exploits structured domain knowledge found in the Unified Medical Language System (UMLS)\footnote{http://www.nlm.nih.gov/research/umls/}.
 The UMLS consists of three tools: a lexicon, a semantic network and a meta-thesaurus. 
 Using underspecified symbolic language processing, SemRep is able to extract a wide range of specific relations, such as TREATS, HAS\_PART and LOCATION\_OF.
-However, adapting such tools to less resourced domains, such as earth science, is difficult because of the lack of resources like UMLS and because of the knowledge, time and effort required for writing extraction rules.
+However, adapting such tools to less resourced domains, such as marine science, is difficult because of the lack of resources like UMLS and because of the knowledge, time and effort required for writing extraction rules.
 
 Other work has concentrated on relation and event extraction through machine learning. 
 Causal relations are one of the most commonly targeted relations.
 In \cite{Mihaila2013}, several machine learning algorithms are applied to recognise causality triggers such as \emph{therefore}, \emph{because}, \emph{as a result of}, etc.
 The approach is tested on BioCause \cite{Mihaila2013BioCause} and BioDRB \cite{Prasad2011Biomedical} corpora, which consist of articles with manually annotated causal relations between named entities in the biomedical domain. 
 A machine learning approach has also been applied by \newcite{Pechsiri2010a} to extract causal relations in the agricultural domain, which are then used to construct explanation knowledge graphs that represent the domain knowledge.
-Supervised learning requires domain-specific training material though, which is currently lacking in our domain of earth science.
+Supervised learning requires domain-specific training material though, which is currently lacking in our domain of climate science, marine science and environmental science.
 
 An alternative approach may be the use of unsupervised learning and clustering techniques. 
 As an example of unsupervised techniques for causal relation extraction, \newcite{Hashimoto2012Excitatory} propose a set of relations that can be used to detect causality. 
@@ -108,7 +108,7 @@ Other approaches have explored extraction of more fine-grained types of events, 
 \newcite{Zambach2010Lexical} identify and linguistically analyse verbs that express regulation relations, positive and negative, between processes and substances in the biomedical domain. 
 They suggest that their analysis can benefit extraction of, as well as reasoning over, these relations in the biomedical domain, although no implementation or evaluation was carried out.
 
-In sum, currently text mining in earth science, climate science and environmental science appears to be virtually non-existent.
+In sum, currently text mining in climate science, marine science and environmental science appears to be virtually non-existent.
 Our research agenda targets developing text mining in this area, in particular towards applications in LBD.
 Existing approaches and tools from other domains such as biomedicine are not readily applicable and
 do not provide extraction of the type of processes and interactions needed for our purposes.  
@@ -442,7 +442,7 @@ Simple string matching between the variables in queries to those in rules will g
 Related to this is the issue of differences in terminology across research fields.
 For instance, \emph{export production} and \emph{biological pump} are different terms, used by chemists and biologists respectively, for the same process of carbon cycling in the oceans. 
 One possible strategy to cope with this issue is to normalize all relevant entities by linking them to a unique concept in an ontology \cite{Bada2012Concept}.
-However, whereas the concepts of interest in biomedicine are relatively well understood -- including entities such cells, proteins and genes -- and covered by widely used ontologies, earth science currently seems to lack a similar common ground.
+However, whereas the concepts of interest in biomedicine are relatively well understood -- including entities such cells, proteins and genes -- and covered by widely used ontologies, such common ground currently seems to lack in climate, marine and environmental science science.
 
 A different but related problem is exemplified in correlation rule \Next[b] extracted from the second part of sentence \Next[a].
 
@@ -475,7 +475,7 @@ Whether or not this constitutes valid inference seems connected to recent develo
 %=============================================================================
 \label{sec:conclusion}
 
-An annotation scheme was proposed to capture events of change, cause, correlation and feedback, as well as  the entities involved in them, in the cross-disciplinary domain of earth science, environmental science and climate science.
+An annotation scheme was proposed to capture events of change, cause, correlation and feedback, as well as  the entities involved in them, in the cross-disciplinary fields of climate science, marine science and environmental science.
 It was shown that rules about the relation between changing processes can be automatically extracted from annotated text.
 Follow up work will involve annotating more text, measuring inter-annotator agreement and rule adequacy.
 Next, tools for automatic annotation will be developed.
