@@ -26,7 +26,7 @@ This paper addresses text mining in the cross-disciplinary fields of climate sci
 It is motivated by the desire for literature-based knowledge discovery from scientific publications.
 The particular goal is to automatically extract relations between quantitative variables from raw text.
 This results in rules of the form ``If variable X increases, than variable Y decreases''.    
-As a first step in this direction, an annotation scheme is proposed to capture the events of interest -- those of change, cause, correlation and feedback -- and the entities involved in them -- quantitative variables.
+As a first step in this direction, an annotation scheme is proposed to capture the events of interest -- those of change, cause, correlation and feedback -- and the entities involved in them, quantitative variables.
 Its purpose is to serve as an intermediary step in the process of rule extraction.
 It is shown that the desired rules can indeed be automatically extracted from annotated text.
 A number of open challenges are discussed, including automatic annotation, normalisation of variables, reasoning with rules in combination with domain knowledge and the need for meta-knowledge regarding context of use.
@@ -136,8 +136,8 @@ Abstracts were manually extracted, tokenised and split into sentences, also allo
 Annotation was carried out using the Brat annotation tool \cite{stenetorp2012}.
 The annotation scheme described below was developed in an iterative fashion in close collaboration with our domain expert.
 It is inspired by annotation efforts in the biomedical domain such as the GENIA corpus \cite{Kim2003GENIA} and the corpora used in the BioNLP shared tasks on event extraction \cite{Kim2009Overview}.
-It covers a particular type of events -- those of change, cause, correlation and feedback -- and the entities involved in them -- quantitative variables.
-The primary reason of annotation is not to analyse the text according to some linguistic formalism or theory, or to follow some knowledge representation formalism or ontological theory.
+It covers a particular type of events -- those of change, cause, correlation and feedback -- and the entities involved in them, quantitative variables.
+The primary reason for annotation is not to analyse the text according to some linguistic formalism or theory, or to follow some knowledge representation formalism or ontological theory.
 Instead the purpose of the annotation is rather pragmatic: to serve as an intermediary step in the process of extracting rules about the relation between quantitative variables from raw text.      
  
 \subsection{Annotation scheme}
@@ -178,9 +178,11 @@ Variables must be indicated as precisely as possible, that is,including any rele
   \a. *a difference in [\emph{carbon concentration}] between the ocean surface and the deep waters
   \b. a difference in [\emph{carbon concentration between the ocean surface and the deep waters}]
 
-The choice is motivated by the idea that, given a syntactic parse, it is usually easier to generalize a complex argument by stripping modifiers than the other way around.  
+The choice is motivated by the assumption that, given a syntactic parse, it is usually easier to generalize a complex argument by stripping modifiers than the other way around.  
 
-Variables are tagged with the label \tag{Variable}. It is most likely advantageous to distinguish different subclasses of variables. Currently we are not concerned with this. 
+Variables are tagged with the label \tag{Variable}. 
+It is most likely advantageous to distinguish different subclasses of variables. 
+Currently we are not concerned with this. 
 However, we do not exclude the possibility of a more fine-grained annotation at a later stage. 
 
 
@@ -193,11 +195,11 @@ This is referred to as the \emph{trigger} for the event.
 Examples of triggers for event types of change, increase and decrease are:
 
 \ex.
-  \a. [\emph{regional changes}] in phytoplankton
+  \a. [\emph{regional changes in}] phytoplankton
   \b. [\emph{addition of}] labile dissolved organic carbon
   \c. [\emph{to slow down}] calcification in corals
 
-Changes must apply to a variable; hence the text span in \Next does not trigger a
+Changes must apply to a variable; hence the text span in \Next does not trigger a change event.
 
 \ex. *marine primary production is sensitive to climate [\emph{variability and change}]
 
@@ -210,8 +212,6 @@ Typical annotation examples are therefore:\footnote{We use labeled brackets to d
   \a. [\tag{Decrease} reduced] [\tag{Theme} calcite production]
   \b. [\tag{Change} significant changes in] [\tag{Theme} surface ocean pH]
 
-In addition, they can optionally have an \tag{Agent} role or a \tag{Co-theme} role, which will be explained in the next Section.
-
 Change events can also function as Cause/Correlate events, as will be described in the next Section, in which case they take an AGENT or CO-THEME role as well.
 
 
@@ -220,7 +220,7 @@ Change events can also function as Cause/Correlate events, as will be described 
 Cause events involve a pair of changes where the first change causes the second change.
 Since a change event involves a changing variable, as its theme, causal events thus express a causal relation between two changing variables. 
 The trigger of a cause event is annotated with a \tag{Cause} tag.
-Triggers are often verbs, but can also be adjectives (\emph{stimulatory}), adverbs (\emph{therefore}) or subjunctive phrases (\emph{due to}, \emph{in response to}) and other phrasal expression (\emph{has an effect on}).  
+Triggers are often verbs, but can also be adjectives (\emph{stimulatory}), adverbs (\emph{therefore}) or subjunctive phrases (\emph{due to}, \emph{in response to}) or other phrasal expressions (\emph{has an effect on}).  
 
 Cause events must always have two thematic roles: an \tag{Agent} identifying the cause and a \tag{Theme} identifying the effect. 
 % Notice that causal relations are directional. 
@@ -242,8 +242,8 @@ In many cases, a cause event and a change event share one and the same trigger, 
 
 In \Last[a], \emph{can strongly influence} serves as the cue for a change event with variable \emph{atmospheric CO2 levels} as its theme. 
 At the same time, it is the trigger for a cause event with agent \emph{ changes in the magnitude of total and export production} and theme \emph{atmospheric CO2 levels}.
-In principle, both events can be annotated individually.  
-However, in order to avoid a needlessly complex annotation, we choose to not annotate the cause event explicitly. 
+In principle, both events can be annotated separately.  
+However, in order to avoid a needlessly complex annotation, we chose to not annotate the cause event explicitly. 
 Instead \emph{changes in the magnitude of total and export production} is given the role of agent in the change event. 
 Presence of an agent role suffices to infer the cause event.
 Two more instances of this pattern are shown in \Last[b] and \Last[c].
@@ -252,6 +252,7 @@ Two more instances of this pattern are shown in \Last[b] and \Last[c].
 
 
 \subsubsection{Correlate}
+\label{sec:correlate}
 
 Correlate events involve a pair of changes where the first change correlates with the second change. 
 Since a change event involves a changing variable, as its theme, correlate events thus express a correlation between two changing variables. 
@@ -261,26 +262,26 @@ Correlations  have two roles, \tag{Theme} and \tag{Co-theme}, both of which shou
 Examples of correlate events:
 
 \exi.
-  \a. [\tag{Theme} reduced calcite production] [\tag{Correlate} \emph{ was accompanied by}] [\tag{Co-theme} an increased proportion of malformed coccoliths]
+  \a. [\tag{Theme} reduced calcite production] [\tag{Correlate} \emph{was accompanied by}] [\tag{Co-theme} an increased proportion of malformed coccoliths]
   \b. [\tag{Theme} carbon:nutrient ratio turns out to decrease] [\tag{Correlate}  \emph{with}] [\tag{Co-theme} increasing mixed-layer depth and temperature]
   \c. Here we report [\tag{Them}e reduced calcite production] [\tag{Correlate}  \emph{at}] [\tag{Co-theme} increased CO2 concentrations]
-  \d. [\tag{Correlate} \emph{When}] [Co-theme bacterial growth rate was limited by mineral nutrients], [Theme extra organic carbon accumulated in the system]
+  \d. [\tag{Correlate} \emph{When}] [\tag{Co-theme} bacterial growth rate was limited by mineral nutrients], [\tag{Theme} extra organic carbon accumulated in the system]
 %  \e. [\tag{Theme} regional changes in phytoplankton] [\tag{Correlate} coincide with] [\tag{Co-theme} observed changes in kril]
 
 Notice that correlation can be triggered by a verb \Last[a], a preposition \Last[b-c] or an adverb/conjunction \Last[d].
 
-Statistically speaking, correlation is not a directional relation, in contrast to causation. That is, if a change in variable A is correlated with a change in variable B, then it follows that a change in variable B is correlated with a change in variable A. However, in discourse there is often a distinction between a variable of interest (the dependent variable) and related variable (the independent variable). 
+Statistically speaking, correlation is not a directional relation, in contrast to causation. That is, if a change in variable A is correlated with a change in variable B, then it follows that a change in variable B is correlated with a change in variable A. However, in discourse there is often a distinction between a variable of interest (the dependent variable) and a related variable (the independent variable). 
 Thus even though strictly speaking there is no causal relation between the two variables, the text usually takes a particular perspective, suggesting one is more central than the other. 
 By convention, the central variable is tagged as \tag{Theme}, whereas the other one is tagged as \tag{Co-theme}. 
 The rule of thumb is that the co-theme is syntactically the argument of a preposition (e.g. \emph{with, at, under}) or an adverb/conjunction (e.g. \emph{when}).  
 
-Occasionally correlations can hold between a change event and a variable, or even between two variables, rather than between to change events.
+Occasionally correlations can hold between a change event and a variable, or even between two variables, rather than between two change events.
 In these exceptional cases, we assume the variable is interpreted as changing (i.e. as being part of an implicit change event), because it is involved in a correlate event.
 Two examples of this exceptional pattern are: 
 
 \exi.
-  \a. [\tag{Increase} Concentrations of DFe increased slightly] [\tag{Correlate} with]  [\tag{Variable} depth in the water column]
-  \b. [\tag{Variable} growth rates in the high-CO2-grown cells] [\tag{Correlate} were related to] [\tag{Variable} light level]
+  \a. [\tag{Theme:Increase} Concentrations of DFe increased slightly] [\tag{Correlate} \emph{with}]  [\tag{Co-theme:Variable} depth in the water column]
+  \b. [\tag{Theme:Variable} growth rates in the high-CO2-grown cells] [\tag{Correlate} \emph{were related to}] [\tag{Co-theme:Variable} light level]
 
 
 In \Last[a], the role of co-theme is not taken by a change event, but by the variable \emph{depth in the water column}.
@@ -292,13 +293,14 @@ Similarly, \Last[b] has both roles of the correlate event taken up by variables,
 
 \subsubsection{Feedback}
 
-Feedback loops are an important concept in climate science. An example is that of the relation between rising temperature and methane release: a rise in temperature causes more permafrost to melt, which causes more release of methane in the atmosphere (a ``green house'' gas), which causes further rising of the temperature, and so on.
+Feedback loops are an important concept in climate science. 
+An example is that of the relation between rising temperature and methane release: a rise in temperature causes more permafrost to melt, which causes more release of methane in the atmosphere (a ``green house'' gas), which causes further rising of the temperature, and so on.
 However, explicit mentioning of feedback events in the text appears to be rare compared with the frequent occurrence of change events, so our proposal for annotation of feedbacks is currently based on only a couple of instances.
 Feedback events hold between two variables, filling the roles of \tag{Theme} and \tag{Co-theme}, as exemplified below: 
 
-\exi. our model suggests the existence of [\tag{+Feedback} a positive feedback between] [\tag{Theme} temperature] and [\tag{Co-theme} atmospheric CO2 content]
+\exi. our model suggests the existence of [\tag{+Feedback} \emph{a positive feedback between}] [\tag{Theme} temperature] and [\tag{Co-theme} atmospheric CO2 content]
 
-Analogously to change events, feedback events can positive (self-sustaining, self-enhancing), negative (self-stabilising, self-diminishing) or of unspecified polarity.
+Analogously to change events, feedback events can be positive (self-sustaining, self-enhancing), negative (self-stabilising, self-diminishing) or of unspecified polarity.
 Positive or negative feedback are annotated with an attribute whenever a trigger is present. 
 
 \subsubsection{Referring expressions}
@@ -309,9 +311,9 @@ Referring expressions such as anaphoric expressions (e.g. \emph{it}, \emph{this}
   \a.[s1:] Future shoaling of upper-mixed-layer depths will expose phytoplankton to [\tag{Increase} increased] [\tag{Theme} mean light intensities].
   \b.[s2:] [\tag{RefExp/Agent} \emph{This}] [\tag{Cause} may cause] [\tag{Decrease} a widespread decline in] [\tag{Theme} marine primary production]
 
-The first sentence contains an \tag{Increase} event, which is referred to in the second sentence by means of the referring expression \emph{This}, establishing it as the cause for the\tag{Decrease} event.
-The referring expressions must therefore be resolved in order to arrive at the rule an increase in mean light intensities causes a decrease in marine primary production.
-In order to achieve this, such referring expressions are tagged as \tag{RefExp} and connected with their antecedent by means of a \tag{Coref} relation. 
+The first sentence contains an \tag{Increase} event, which is referred to in the second sentence by means of the referring expression \emph{This}, establishing it as the cause for the \tag{Decrease} event.
+Such referring expressions must therefore be resolved in order to deduce the rule that an increase in mean light intensities causes a decrease in marine primary production.
+In order to achieve this, they are tagged as \tag{RefExp} and connected with their antecedent by means of a \tag{Coref} relation. 
   
 
 \subsubsection{Combinations}
@@ -326,8 +328,11 @@ Likewise, two increasing events are combined to serve as the theme in a causal e
   \b. [\tag{Cause} gave] [\tag{Part:Increase} higher ] Fe(II) concentration [\tag{Theme:And} and] [\tag{Part:Increase} higher] growth rate of phytoplankton
 
 The alternative option in \Last[a] is to tag the whole combined phrase as a single variable.
-We chose not do so because coordination is notoriously hard problem for syntactic parsers and any help from the annotation in resolving ambiguity should be exploited.
+We chose not do so because coordination is a notoriously hard problem for syntactic parsers and any help from the annotation in resolving ambiguity should be exploited.
 Notice also that a similar option is not available in \Last[b], as considering the whole combination as a single change event would result in loss of substantial information.
+
+There are certain cases, like where an adjectival modifier modifies a conjunction of two variables, that can no be accommodated by the proposed annotation scheme.
+Covering these instances requires additional relations or events, which would further complicate the annotation process. 
 
 
 \subsubsection{Negation}
@@ -350,12 +355,11 @@ The proposed annotation allows for automatic extraction of rules about the relat
 There are three main types of rules: causal rules, correlation rules and feedback rules.
 
 Causal rules are of the type ``If variable X changes, than variable Y changes''.
-An example of such rule its source text is shown in Figure~\ref{fig:ex1}.
+An example of such a rule and its source text is shown in Figure~\ref{fig:ex1}.
 The notation uses single arrows to denote changing variables, where `$\uparrow$' stands for 'increasing', `$\downarrow$' for 'decreasing' and `$\updownarrow$' for 'changing.'
-Parts of combination are joined by `$\wedge$' and delimited by square brackets.
+Parts of a combination are joined by `$\wedge$' or `$\vee$' and delimited by square brackets.
 A causal relation is denoted by the double arrow `$\Longrightarrow$'.
 Causal rules are basically extracted by looking for \tag{Cause} events, taking their \tag{Agent} and \tag{Theme} roles for cause and effect respectively.
-Another source for causal rules is change events with both an \tag{Agent} and a \tag{Theme} role.
 Notice that in Figure~\ref{fig:ex1}, interpreting combinations and resolving referring expressions to their antecedent takes some additional processing.
 Another source for causal rules is change events with both \tag{Agent} and \tag{Theme} roles.
 
@@ -370,7 +374,7 @@ Notice that conceptually a feedback relation is assumed to hold between changing
 However, often there is no explicit trigger for a change event present in the text.
 For example, in the annotation in Figure~\ref{fig:ex3}, both roles are filled by variables instead of change events.
 Such variables are therefore 'promoted' to change events during rule extraction, resulting in `$\updownarrow$ temperature' and `$\updownarrow$ marine primary production'.
-Similar promotion apply occasionally to variables in events of change, cause or correlation.
+Similar promotions apply occasionally to variables in events of change, cause or correlation (cf. Section~\ref{sec:correlate}).
 
 
 \setlength{\fboxsep}{10pt}
@@ -381,8 +385,8 @@ Similar promotion apply occasionally to variables in events of change, cause or 
 \includegraphics[scale=0.9]{ex1.pdf}}
 \framebox[\textwidth]{[ $\uparrow$ mean light intensities $\wedge$ $\uparrow$ CO2 levels ]~~~ $\Longrightarrow$~~~$\downarrow$ marine primary production}
  \caption{Example of a causal rule extracted from a pair of annotated sentences}
-\end{center}
 \label{fig:ex1}
+\end{center}
 \end{figure*}
 
 
@@ -392,10 +396,9 @@ Similar promotion apply occasionally to variables in events of change, cause or 
 \includegraphics[scale=0.9]{ex2.pdf}}
 \framebox[\textwidth]{[ $\uparrow$ mixed-layer depth $\wedge$ $\uparrow$ temperature ]~~~ $\leadsto$~~~$\downarrow$ the carbon:nutrient ratio}
  \caption{Example of a correlation rule extracted from an annotated sentence}
-\end{center}
 \label{fig:ex2}
+\end{center}
 \end{figure*}
-
 
 
 \begin{figure*}
@@ -404,8 +407,8 @@ Similar promotion apply occasionally to variables in events of change, cause or 
 \includegraphics[scale=0.9]{ex3.pdf}}
 \framebox[\textwidth]{$\updownarrow$ temperature~~~$\Longleftrightarrow^{+}$~~~$\updownarrow$ marine primary production}
  \caption{Example of a feedback rule extracted from an annotated sentence}
-\end{center}
 \label{fig:ex3}
+\end{center}
 \end{figure*}
 
 
@@ -417,22 +420,22 @@ Similar promotion apply occasionally to variables in events of change, cause or 
 The annotation scheme proposed below seems a good candidate for the purpose of rule extraction.
 However, it has only been tried on a small set of abstracts and it remains to be seen how it holds up when applied to more text.
 Inter-annotator agreement has not been measured so far.
-In addition to this, we are also considering a type of evaluation in which extracted rules and their corresponding source texts are shown to domain experts, who are then asked to judge to what extent the rule is entailed by the text. 
+In addition to this, we are also considering a type of evaluation in which extracted rules and their corresponding source texts are shown to domain experts, who are then asked to judge if the rule is entailed by the text. 
 
 Manual annotation is costly. There are at least two strategies which may reduce annotation time and costs. 
 The first one is to bootstrap from existing extraction systems.
-Recent advances in open information extraction, where there is no predefined set of entities and relations, have resulted in systems like ReVerb \cite{Fader2011Identifying} and it successor OpenIE.
+Recent advances in \emph{open information extraction}, where there is no predefined set of entities and relations, have resulted in open source systems like ReVerb \cite{Fader2011Identifying} and it successor OpenIE.
 \newcite{Banko2008Tradeoffs} claim that when the number of target relations is small, and their
 names are known in advance, an open IE system is able to match the precision of a traditional
 supervised extraction system, though at substantially lower recall.
 This suggests that at least a part of the annotation can be accelerated with the help of such tools.
 
-A second strategy to reduce annotation costs involves the use of active learning, which is a training method for supervised learners that tries to obtain maximal gain with minimal annotation effort \cite{Olsson09}.
+A second strategy to reduce annotation costs involves the use of \emph{active learning}, which is a training method for supervised learners that tries to obtain maximal performance gain with minimal annotation effort \cite{Olsson09}.
 It is an iterative procedure, starting with a small amount of labeled data and a large amount of unlabelled data.
 In each iteration, a classifier is trained on the labeled data and subsequently applied to the unlabelled data.
-The most informative instances -- e.g., those for which classification confidence is lowest -- are passed on to a human annotator for manual annotation.
-The manually labeled instances are added to the training data and the procedure is repeated.
-Good results have been reported with the use of active learning, e.g. \cite{gamback2011active}.
+Only the most informative instances -- e.g., those for which classification confidence is lowest -- are passed on to a human annotator for manual annotation.
+These manually labeled instances are added to the training data and the procedure is repeated.
+Good results have been reported with the use of active learning, e.g. by \cite{gamback2011active}.
 
 The extracted rules expressing relations of correlation, causality or feedback between quantitative variables are intended to be used in knowledge discovery support systems.
 One use case is to search for other variables directly related to a certain variable of interest.
@@ -442,7 +445,7 @@ Simple string matching between the variables in queries to those in rules will g
 Related to this is the issue of differences in terminology across research fields.
 For instance, \emph{export production} and \emph{biological pump} are different terms, used by chemists and biologists respectively, for the same process of carbon cycling in the oceans. 
 One possible strategy to cope with this issue is to normalize all relevant entities by linking them to a unique concept in an ontology \cite{Bada2012Concept}.
-However, whereas the concepts of interest in biomedicine are relatively well understood -- including entities such cells, proteins and genes -- and covered by widely used ontologies, such common ground currently seems to lack in climate, marine and environmental science science.
+However, whereas the concepts of interest in biomedicine are relatively well understood -- including such entities as cells, proteins and genes -- and covered by widely used ontologies, such common ground currently seems to lack in climate, marine and environmental science science.
 
 A different but related problem is exemplified in correlation rule \Next[b] extracted from the second part of sentence \Next[a].
 
@@ -454,13 +457,13 @@ The problem is that \emph{depth} in \Last[b] is too general and should in fact b
 Likewise, \emph{that of TaLFe} should be interpreted as \emph{concentrations of TalFE}.
 This illustrates the need for coreference resolution and more general, linking of subsequent mentions of the same entity in the text, a notoriously hard task in NLP. 
 
-Another use case for extracted rules is to generate potential hypotheses about indirect relations between variables or feedback loops.
+Apart from searh, another use case for extracted rules is to generate potential hypotheses about indirect relations between variables or feedback loops among them.
 This can be accomplished by chaining together two or more rules, matching the change event on the right-hand-side of one rule to a similar change event on the left-hand-side of another rule.
 Matching gives rise to the same problems discussed above, i.e., different ways of referring to the same entity.
 In addition, there is the issue of context-dependency.
 Most rules are not universally applicable, but only apply under certain conditions in a particular context.
 For example, a rule may be limited in scope to certain biological species or organisms, a particular geographical region or historical time period, subject to a given assumption (\emph{only if \ldots}), etc.
-This is related to initiatives for annotating meta-knowledge such as confidence level (fact vs. conjecture), source (observation vs. analysis) or origin (present or cited work) as in  \cite{Thompson2011Enriching}.  
+This is related to initiatives for annotating meta-knowledge such as confidence level (fact vs. conjecture), source (resulting from observation vs. analysis) or origin (present or cited work) as in  \cite{Thompson2011Enriching}.  
 Proper modelling of rule context would require a rather deep understanding of the whole text. 
 For now, we plan to leave this to the user by offering facilities in the user interface to quickly inspect the source text for each rule.
 
@@ -477,8 +480,8 @@ Whether or not this constitutes valid inference seems connected to recent develo
 
 An annotation scheme was proposed to capture events of change, cause, correlation and feedback, as well as  the entities involved in them, in the cross-disciplinary fields of climate science, marine science and environmental science.
 It was shown that rules about the relation between changing processes can be automatically extracted from annotated text.
-Follow up work will involve annotating more text, measuring inter-annotator agreement and rule adequacy.
-Next, tools for automatic annotation will be developed.
+Follow-up work will involve annotating more text, as well as measuring inter-annotator agreement and rule adequacy.
+Simultaneously, tools for automatic annotation will be developed.
 Future work will also address normalisation of entities, tracking of entity mentions, modelling of rule context and combination with domain knowledge. 
 
  
