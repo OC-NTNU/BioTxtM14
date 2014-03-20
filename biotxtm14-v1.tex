@@ -14,11 +14,18 @@
 \title{Towards text mining in climate science:\\
 extraction of quantitative variables and their relations}
 
-\name{Author1, Author2, Author3}
+\name{
+  Erwin Marsi\textsuperscript{1}, 
+  Pinar \"Ozt\"urk\textsuperscript{1}, 
+  Elias Aamot\textsuperscript{1}, 
+  Gleb Sizov\textsuperscript{1}, 
+  Murat V. Ardelan\textsuperscript{2}}
 
-\address{ Affiliation1, Affiliation2, Affiliation3 \\
-               Address1, Address2, Address3 \\
-               author1@xxx.yy, author2@zzz.edu, author3@hhh.com\\}
+\address{ 
+  \textsuperscript{1}Department of Computer and Information Science, 
+  \textsuperscript{2}Department of Chemistry \\
+  Norwegian University of Science and Technology (NTNU) \\
+  \{emarsi,pinar,sizov\}@idi.ntnu.no, eliasaa@stud.ntnu.no, murat.v.ardelan@ntnu.no\\}
 
 
 \abstract{
@@ -158,9 +165,9 @@ Examples of changing, increasing and decreasing variables respectively:
 \ex.
   \a. significant changes in [\emph{surface ocean pH}]
   \b. rise in [\emph{atmospheric CO2 levels}]
-  \c. decline in [\emph{marine primary production}]
+  \c. decline in [\emph{marine primary production}]\footnote{The total amount of energy produced by marine organisms such as photosynthetic plankton.}
 
-In contract, the text spans in \Next are not annotated as variables.
+In contrast, the text spans in \Next are not annotated as variables.
 
 \ex.
   \a. *[\emph{carbon dioxide}] and [\emph{light}] are two major prerequisites of photosynthesis
@@ -181,9 +188,8 @@ Variables must be indicated as precisely as possible, that is,including any rele
 The choice is motivated by the assumption that, given a syntactic parse, it is usually easier to generalize a complex argument by stripping modifiers than the other way around.  
 
 Variables are tagged with the label \tag{Variable}. 
-It is most likely advantageous to distinguish different subclasses of variables. 
-Currently we are not concerned with this. 
-However, we do not exclude the possibility of a more fine-grained annotation at a later stage. 
+We intend to distinguish different subclasses of variables, resulting in a more fine-graned categorisation of entities, in the near future.
+For now, we focus on annotation of the events and basic logic structure. 
 
 
 \subsubsection{Change, Increase and Decrease}
@@ -246,7 +252,9 @@ In principle, both events can be annotated separately.
 However, in order to avoid a needlessly complex annotation, we chose to not annotate the cause event explicitly. 
 Instead \emph{changes in the magnitude of total and export production} is given the role of agent in the change event. 
 Presence of an agent role suffices to infer the cause event.
-Two more instances of this pattern are shown in \Last[b] and \Last[c].
+In other words, where there is both a cause event and a change event, we annotate the change event because it can be
+inferred from the presence of the agent role that a cause event is also being annotated.
+Two more instances of this pattern are shown in \Last[b]\footnote{The agent in example \Last[b], i.e. \emph{high CO2 partial pressures}, is arguably not an event but a state. However, we took the liberty to interpret this as \emph{increasing CO2 partial pressures} in this context, which is in accordance with the interpretation of our domain expert.} and \Last[c].
 
 \EM{Describe exceptional cases of variable with implicit change}
 
@@ -306,11 +314,13 @@ Positive or negative feedback are annotated with an attribute whenever a trigger
 \subsubsection{Referring expressions}
 
 Referring expressions such as anaphoric expressions (e.g. \emph{it}, \emph{this}) and underspecified definite descriptions (e.g. \emph{the process}) are annotated only in so far as they play a thematic role in an event of interest. Consider the following narrative:
+\pagebreak[4]
 
 \exi. 
   \a.[s1:] Future shoaling of upper-mixed-layer depths will expose phytoplankton to [\tag{Increase} increased] [\tag{Theme} mean light intensities].
   \b.[s2:] [\tag{RefExp/Agent} \emph{This}] [\tag{Cause} may cause] [\tag{Decrease} a widespread decline in] [\tag{Theme} marine primary production]
 
+A graphical representation of a slightly extended version of this example is shown in Figure~\ref{fig:ex1}.
 The first sentence contains an \tag{Increase} event, which is referred to in the second sentence by means of the referring expression \emph{This}, establishing it as the cause for the \tag{Decrease} event.
 Such referring expressions must therefore be resolved in order to deduce the rule that an increase in mean light intensities causes a decrease in marine primary production.
 In order to achieve this, they are tagged as \tag{RefExp} and connected with their antecedent by means of a \tag{Coref} relation. 
@@ -324,15 +334,16 @@ In \Next[a], for example, the combination \tag{And} serves as the theme of the \
 Likewise, two increasing events are combined to serve as the theme in a causal event.
 
 \exi.
-  \a. [\tag{Increase} increasing [\tag{Part:Variable} mixed-layer depth] [\tag{Theme:And} and] [\tag{Part:Variable} temperature]  
-  \b. [\tag{Cause} gave] [\tag{Part:Increase} higher ] Fe(II) concentration [\tag{Theme:And} and] [\tag{Part:Increase} higher] growth rate of phytoplankton
+  \a. [\tag{Increase} increasing] [\tag{Part:Variable} mixed-layer depth] [\tag{Theme:And} and] [\tag{Part:Variable} temperature]  
+  \b. [\tag{Cause} gave] [\tag{Part:Increase} higher ] [\tag{Theme} Fe(II) concentration] [\tag{Theme:And} and] [\tag{Part:Increase} higher] [\tag{Theme} growth rate of phytoplankton]
 
 The alternative option in \Last[a] is to tag the whole combined phrase as a single variable.
 We chose not do so because coordination is a notoriously hard problem for syntactic parsers and any help from the annotation in resolving ambiguity should be exploited.
 Notice also that a similar option is not available in \Last[b], as considering the whole combination as a single change event would result in loss of substantial information.
 
-There are certain cases, like where an adjectival modifier modifies a conjunction of two variables, that can no be accommodated by the proposed annotation scheme.
-Covering these instances requires additional relations or events, which would further complicate the annotation process. 
+There are certain cases, like where an adjectival modifier modifies a conjunction of two variables, that can not be accommodated by the proposed annotation scheme.
+This is not a shortcoming of the Brat annotation tool, but a matter of trade-off between expressivity and complexity: covering these instances requires additional relations or events, which would further complicate the annotation process.
+However, judging from the sample texts annotated so far, these cases are rare.
 
 
 \subsubsection{Negation}
@@ -419,6 +430,10 @@ Similar promotions apply occasionally to variables in events of change, cause or
  
 The annotation scheme proposed below seems a good candidate for the purpose of rule extraction.
 However, it has only been tried on a small set of abstracts and it remains to be seen how it holds up when applied to more text.
+To provide some indicative statistics, the pilot-corpus contains the following number of labels: 107 \tag{Variable}, 33 \tag{Change}, 82 \tag{Increase}, 50 \tag{Decrease}, 20 \tag{Cause}, 26 \tag{Correlate}, 32 \tag{And}, 2 \tag{Or}, 5 \tag{RefExp} and \tag{2 Negation}.
+Annotation of more text is required to settle certain corner cases and is likely to reveal additional issues.
+For example, the current scheme can not capture the fact that \emph{ocean acidification} is an event, i.e., a decrease of the pH of the ocean water.
+If similar examples turn out to occur frequently, this may cause a revision of the annotation scheme. 
 Inter-annotator agreement has not been measured so far.
 In addition to this, we are also considering a type of evaluation in which extracted rules and their corresponding source texts are shown to domain experts, who are then asked to judge if the rule is entailed by the text. 
 
@@ -444,7 +459,9 @@ The variable in question may be expressed in many different ways though, for exa
 Simple string matching between the variables in queries to those in rules will given limited recall and precision.
 Related to this is the issue of differences in terminology across research fields.
 For instance, \emph{export production} and \emph{biological pump} are different terms, used by chemists and biologists respectively, for the same process of carbon cycling in the oceans. 
-One possible strategy to cope with this issue is to normalize all relevant entities by linking them to a unique concept in an ontology \cite{Bada2012Concept}.
+One possible strategy to cope with this issue is to have a more fine-grained categorisation of entities, allowing different surface realisations to be mapped to the same underlying domain concept. 
+This would allow more general rules to be extracted, and could also be beneficial in helping to bootstrap lexical resources.
+Ultimately all relevant entities may be normalised by linking them to a unique concept in a domain ontology \cite{Bada2012Concept}.
 However, whereas the concepts of interest in biomedicine are relatively well understood -- including such entities as cells, proteins and genes -- and covered by widely used ontologies, such common ground currently seems to lack in climate, marine and environmental science science.
 
 A different but related problem is exemplified in correlation rule \Next[b] extracted from the second part of sentence \Next[a].
@@ -457,7 +474,7 @@ The problem is that \emph{depth} in \Last[b] is too general and should in fact b
 Likewise, \emph{that of TaLFe} should be interpreted as \emph{concentrations of TalFE}.
 This illustrates the need for coreference resolution and more general, linking of subsequent mentions of the same entity in the text, a notoriously hard task in NLP. 
 
-Apart from searh, another use case for extracted rules is to generate potential hypotheses about indirect relations between variables or feedback loops among them.
+Apart from search, another use case for extracted rules is to generate potential hypotheses about indirect relations between variables or feedback loops among them.
 This can be accomplished by chaining together two or more rules, matching the change event on the right-hand-side of one rule to a similar change event on the left-hand-side of another rule.
 Matching gives rise to the same problems discussed above, i.e., different ways of referring to the same entity.
 In addition, there is the issue of context-dependency.
@@ -465,7 +482,8 @@ Most rules are not universally applicable, but only apply under certain conditio
 For example, a rule may be limited in scope to certain biological species or organisms, a particular geographical region or historical time period, subject to a given assumption (\emph{only if \ldots}), etc.
 This is related to initiatives for annotating meta-knowledge such as confidence level (fact vs. conjecture), source (resulting from observation vs. analysis) or origin (present or cited work) as in  \cite{Thompson2011Enriching}.  
 Proper modelling of rule context would require a rather deep understanding of the whole text. 
-For now, we plan to leave this to the user by offering facilities in the user interface to quickly inspect the source text for each rule.
+Although we acknowledge the importance of conditions on events, we intend to leave their annotation to a later stage. 
+For now, we plan to leave this to the user by offering facilities in the user interface to quickly inspect the source text for each rule. 
 
 Inference with rules may be further enhanced by exploiting domain knowledge.
 For example, given an ontology which contains the fact that \emph{diatoms} are a kind of \emph{phytoplankton}, rules containing either of the terms may be generalised by substituting the hypernym or specialised by substituting the hyponym.
@@ -489,9 +507,8 @@ Future work will also address normalisation of entities, tracking of entity ment
 \section{Acknowledgements}
 %=============================================================================
 
-\todo[inline]{
 Financial aid from the European Commission (OCEAN-CERTAIN, FP7-ENV-2013-6.1-1; no: 603773) is gratefully acknowledged. 
-}
+We thank the reviewers for their valuable comments. 
 
 \bibliographystyle{lrec2006}
 \bibliography{biotxtm14}
